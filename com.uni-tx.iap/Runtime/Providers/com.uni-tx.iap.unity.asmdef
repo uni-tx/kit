@@ -1,0 +1,27 @@
+{
+    "name": "com.uni-tx.iap.unity",
+    "rootNamespace": "UniTx.Iap.Providers",
+    "references": [
+        "com.uni-tx.iap",
+        "com.uni-tx.core",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "Unity.Purchasing"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITX_UNITY_IAP"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.purchasing",
+            "expression": "5.0.0",
+            "define": "UNITX_UNITY_IAP"
+        }
+    ],
+    "noEngineReferences": false
+}

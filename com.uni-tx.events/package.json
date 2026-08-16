@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.events",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "displayName": "UniTx Events",
   "description": "Zero-allocation, priority-ordered event bus for value-type events.",
   "unity": "6000.5",

@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.ads",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "displayName": "UniTx Ads",
   "description": "SDK-agnostic ads facade for rewarded, interstitial, app-open, banner and MREC placements, with nine-way positioning and safe-area offsetting.",
   "unity": "6000.5",

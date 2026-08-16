@@ -8,6 +8,12 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-08-16
+
+### Changed
+
+- `com.unity.inputsystem` floor raised to **1.20.0** (registry latest).
+
 ## [1.1.0] - 2026-08-16
 
 ### Changed

@@ -1,0 +1,31 @@
+# Changelog
+
+All notable changes to `com.uni-tx.iap` are documented here.
+
+The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this
+package uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html). All UniTx
+packages are released in lockstep at the same version.
+
+## [Unreleased]
+
+## [1.2.0] - 2026-08-16
+
+### Added
+
+- Initial release.
+- `UniIap` — static facade with `InitializeAsync`, `PurchaseAsync`, `RestoreAsync`,
+  `IsOwned`, `GetPrice` and `GetTitle`.
+- `UniIap.OnPurchased` — the single place content is granted. Fires for direct purchases,
+  restores, subscription renewals and deferred orders that clear later, so a game cannot
+  lose an entitlement by only handling the purchase call's return value.
+- `IIapProvider` — the store seam, with `NoOpIapProvider` as the default so a project
+  without a billing SDK still compiles and runs.
+- `UnityIapProvider` — adapter for **Unity IAP 5.x**, targeting the
+  `UnityIAPServices.StoreController()` service API rather than the 4.x
+  `IStoreController`/`IStoreListener` pair. Confirms every pending order, so the store
+  stops re-delivering purchases and Google Play consumables can be bought again.
+- `UniIapConfig` — catalog `ScriptableObject` with per-store product id overrides and
+  `DescribeProblems()`, which reports blank and duplicate ids before they surface as an
+  opaque store fetch failure.
+- Purchase overlap guard, so a double-tapped buy button reaches the store once.
+- Sample: **Shop Screen**.

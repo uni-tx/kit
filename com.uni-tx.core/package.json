@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.core",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "displayName": "UniTx Core",
   "description": "Foundation for the UniTx kit: lifecycle contracts, app bootstrap, clocks, Unity event listener, safe-area insets, scene loading and extensions.",
   "unity": "6000.5",
@@ -25,7 +25,7 @@
     "safe-area"
   ],
   "dependencies": {
-    "com.unity.inputsystem": "1.14.0",
+    "com.unity.inputsystem": "1.20.0",
     "com.unity.modules.unitywebrequest": "1.0.0",
     "com.unity.modules.imgui": "1.0.0"
   },

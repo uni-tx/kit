@@ -17,9 +17,9 @@ package's siblings are not pulled in automatically. Paste the whole block into
 ```jsonc
 "dependencies": {
   "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
-  "com.uni-tx.ioc": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.1.0",
-  "com.uni-tx.core": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.1.0",
-  "com.uni-tx.analytics": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.analytics#analytics@1.1.0"
+  "com.uni-tx.ioc": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.2.0",
+  "com.uni-tx.core": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.2.0",
+  "com.uni-tx.analytics": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.analytics#analytics@1.2.0"
 }
 ```
 
@@ -30,9 +30,9 @@ Use this exact order — dependencies before dependents, or the editor throws tr
 compile errors between adds:
 
 1. `https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11`
-2. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.1.0`
-3. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.1.0`
-4. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.analytics#analytics@1.1.0`
+2. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.2.0`
+3. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.2.0`
+4. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.analytics#analytics@1.2.0`
 
 </details>
 

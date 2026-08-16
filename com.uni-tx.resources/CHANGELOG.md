@@ -8,6 +8,13 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-08-16
+
+### Changed
+
+- `com.unity.addressables` floor raised to **4.0.1** (registry latest), up from 2.9.1.
+  Verified against Unity 6.5 with the full kit test suite; UniTask's Addressables bridge compiles unchanged.
+
 ## [1.1.0] - 2026-08-16
 
 ### Changed

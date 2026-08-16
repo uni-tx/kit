@@ -8,6 +8,12 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-08-16
+
+### Changed
+
+- `com.unity.addressables` floor raised to **4.0.1** (registry latest), up from 2.9.1.
+
 ## [1.1.0] - 2026-08-16
 
 ### Changed

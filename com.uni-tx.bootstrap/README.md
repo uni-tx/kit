@@ -17,18 +17,18 @@ package's siblings are not pulled in automatically. Paste the whole block into
 ```jsonc
 "dependencies": {
   "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
-  "com.uni-tx.ioc": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.1.0",
-  "com.uni-tx.core": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.1.0",
-  "com.uni-tx.events": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.events#events@1.1.0",
-  "com.uni-tx.resources": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.1.0",
-  "com.uni-tx.pooling": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.pooling#pooling@1.1.0",
-  "com.uni-tx.audio": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.audio#audio@1.1.0",
-  "com.uni-tx.content": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.1.0",
-  "com.uni-tx.serialization": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.serialization#serialization@1.1.0",
-  "com.uni-tx.widgets": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.widgets#widgets@1.1.0",
-  "com.uni-tx.entity": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.entity#entity@1.1.0",
-  "com.uni-tx.sprite-loader": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.sprite-loader#sprite-loader@1.1.0",
-  "com.uni-tx.bootstrap": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.bootstrap#bootstrap@1.1.0"
+  "com.uni-tx.ioc": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.2.0",
+  "com.uni-tx.core": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.2.0",
+  "com.uni-tx.events": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.events#events@1.2.0",
+  "com.uni-tx.resources": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.2.0",
+  "com.uni-tx.pooling": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.pooling#pooling@1.2.0",
+  "com.uni-tx.audio": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.audio#audio@1.2.0",
+  "com.uni-tx.content": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.2.0",
+  "com.uni-tx.serialization": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.serialization#serialization@1.2.0",
+  "com.uni-tx.widgets": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.widgets#widgets@1.2.0",
+  "com.uni-tx.entity": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.entity#entity@1.2.0",
+  "com.uni-tx.sprite-loader": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.sprite-loader#sprite-loader@1.2.0",
+  "com.uni-tx.bootstrap": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.bootstrap#bootstrap@1.2.0"
 }
 ```
 
@@ -39,18 +39,18 @@ Use this exact order — dependencies before dependents, or the editor throws tr
 compile errors between adds:
 
 1. `https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11`
-2. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.1.0`
-3. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.1.0`
-4. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.events#events@1.1.0`
-5. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.1.0`
-6. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.pooling#pooling@1.1.0`
-7. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.audio#audio@1.1.0`
-8. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.1.0`
-9. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.serialization#serialization@1.1.0`
-10. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.widgets#widgets@1.1.0`
-11. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.entity#entity@1.1.0`
-12. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.sprite-loader#sprite-loader@1.1.0`
-13. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.bootstrap#bootstrap@1.1.0`
+2. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.2.0`
+3. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.2.0`
+4. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.events#events@1.2.0`
+5. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.2.0`
+6. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.pooling#pooling@1.2.0`
+7. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.audio#audio@1.2.0`
+8. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.2.0`
+9. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.serialization#serialization@1.2.0`
+10. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.widgets#widgets@1.2.0`
+11. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.entity#entity@1.2.0`
+12. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.sprite-loader#sprite-loader@1.2.0`
+13. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.bootstrap#bootstrap@1.2.0`
 
 </details>
 

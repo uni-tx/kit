@@ -8,6 +8,12 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-08-16
+
+### Changed
+
+- Version bump only; all UniTx packages are released in lockstep.
+
 ## [1.1.0] - 2026-08-16
 
 ### Changed

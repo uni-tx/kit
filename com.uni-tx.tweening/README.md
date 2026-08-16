@@ -17,7 +17,7 @@ package's siblings are not pulled in automatically. Paste the whole block into
 ```jsonc
 "dependencies": {
   "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
-  "com.uni-tx.tweening": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.tweening#tweening@1.1.0"
+  "com.uni-tx.tweening": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.tweening#tweening@1.2.0"
 }
 ```
 
@@ -28,7 +28,7 @@ Use this exact order — dependencies before dependents, or the editor throws tr
 compile errors between adds:
 
 1. `https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11`
-2. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.tweening#tweening@1.1.0`
+2. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.tweening#tweening@1.2.0`
 
 </details>
 
