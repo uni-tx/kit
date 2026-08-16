@@ -2,7 +2,7 @@
 
 Allocation-light UniTask tween engine for transforms, colors and arbitrary values, with easing and awaitable sequencing.
 
-**Unity 6.5 (6000.5) or newer** · MIT · v1.1.0
+**Unity 6.5 (6000.5) or newer** · MIT · v1.3.0
 
 Awaitable tweens for transforms, colors, alpha and arbitrary values. Sequencing
 is `await`, parallelism is `UniTask.WhenAll` — there is no sequence type to learn.
@@ -17,7 +17,7 @@ package's siblings are not pulled in automatically. Paste the whole block into
 ```jsonc
 "dependencies": {
   "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
-  "com.uni-tx.tweening": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.tweening#tweening@1.2.0"
+  "com.uni-tx.tweening": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.tweening#tweening@1.3.0"
 }
 ```
 
@@ -28,12 +28,14 @@ Use this exact order — dependencies before dependents, or the editor throws tr
 compile errors between adds:
 
 1. `https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11`
-2. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.tweening#tweening@1.2.0`
+2. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.tweening#tweening@1.3.0`
 
 </details>
 
 - **UniTx dependencies:** none
-- **Unity registry dependencies** (resolved automatically): `com.unity.modules.ui` (CanvasGroup).
+- **Unity registry dependencies** (resolved automatically by UPM):
+  - `com.unity.modules.ui` 1.0.0 (CanvasGroup)
+  - `com.unity.test-framework` 1.4.6 (the shipped Tests/ assemblies)
 
 > `com.uni-tx.core` ships a dependency doctor that reports exactly which packages are
 > missing, so a partial install fails with an explanation rather than a wall of

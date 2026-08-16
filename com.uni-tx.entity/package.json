@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.entity",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "displayName": "UniTx Entity",
   "description": "Runtime entities that combine static content data with persisted saved data.",
   "unity": "6000.5",
@@ -22,7 +22,9 @@
     "gameplay",
     "model"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "com.unity.test-framework": "1.4.6"
+  },
   "samples": [
     {
       "displayName": "Entity Demo",

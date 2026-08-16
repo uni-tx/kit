@@ -2,7 +2,7 @@
 
 SDK-agnostic ads facade for rewarded, interstitial, app-open, banner and MREC placements, with nine-way positioning and safe-area offsetting.
 
-**Unity 6.5 (6000.5) or newer** · MIT · v1.1.0
+**Unity 6.5 (6000.5) or newer** · MIT · v1.3.0
 
 An SDK-agnostic ads facade covering rewarded, interstitial, app-open, banner and
 MREC placements, with nine-way positioning, safe-area offsetting, cooldown and overlap
@@ -19,9 +19,9 @@ package's siblings are not pulled in automatically. Paste the whole block into
 ```jsonc
 "dependencies": {
   "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
-  "com.uni-tx.ioc": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.2.0",
-  "com.uni-tx.core": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.2.0",
-  "com.uni-tx.ads": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ads#ads@1.2.0"
+  "com.uni-tx.ioc": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.3.0",
+  "com.uni-tx.core": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.3.0",
+  "com.uni-tx.ads": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ads#ads@1.3.0"
 }
 ```
 
@@ -32,14 +32,20 @@ Use this exact order — dependencies before dependents, or the editor throws tr
 compile errors between adds:
 
 1. `https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11`
-2. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.2.0`
-3. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.2.0`
-4. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.ads#ads@1.2.0`
+2. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.3.0`
+3. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.3.0`
+4. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.ads#ads@1.3.0`
 
 </details>
 
 - **UniTx dependencies:** `com.uni-tx.ioc`, `com.uni-tx.core`
-- **Unity registry dependencies:** none
+- **Unity registry dependencies** (resolved automatically by UPM):
+  - `com.unity.test-framework` 1.4.6 (the shipped Tests/ assemblies)
+- **No ads SDK is a dependency.** Install `com.unity.services.levelplay` (9.0.0+) to enable
+  the LevelPlay adapter. Declaring it here would force every consumer — including games
+  that show no ads — to link a mediation SDK, with its native binaries, manifest entries
+  and policy obligations. Without it the package still compiles and requests resolve to
+  `AdResult.NotReady`.
 
 > `com.uni-tx.core` ships a dependency doctor that reports exactly which packages are
 > missing, so a partial install fails with an explanation rather than a wall of

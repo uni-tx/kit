@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.events",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "displayName": "UniTx Events",
   "description": "Zero-allocation, priority-ordered event bus for value-type events.",
   "unity": "6000.5",
@@ -23,7 +23,9 @@
     "messaging",
     "pubsub"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "com.unity.test-framework": "1.4.6"
+  },
   "samples": [
     {
       "displayName": "Event Bus Basics",

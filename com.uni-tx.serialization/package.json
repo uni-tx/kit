@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.serialization",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "displayName": "UniTx Serialization",
   "description": "Batched, atomic JSON save/load to persistent storage with flush-on-pause and schema migration.",
   "unity": "6000.5",
@@ -23,7 +23,10 @@
     "persistence",
     "json"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "com.unity.modules.jsonserialize": "1.0.0",
+    "com.unity.test-framework": "1.4.6"
+  },
   "samples": [
     {
       "displayName": "Save Load",

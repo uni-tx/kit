@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.iap",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "displayName": "UniTx IAP",
   "description": "SDK-agnostic in-app purchase facade with awaitable purchases, restore handling, entitlement fan-out and a Unity IAP 5.x adapter.",
   "unity": "6000.5",
@@ -26,7 +26,10 @@
     "subscription",
     "receipt"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "com.unity.modules.jsonserialize": "1.0.0",
+    "com.unity.test-framework": "1.4.6"
+  },
   "samples": [
     {
       "displayName": "Shop Screen",

@@ -2,7 +2,7 @@
 
 JSON-driven static game data: register types to files, load by Addressables label, query by key or type.
 
-**Unity 6.5 (6000.5) or newer** · MIT · v1.1.0
+**Unity 6.5 (6000.5) or newer** · MIT · v1.3.0
 
 Static game data as JSON: bind a file name to a type, load by Addressables
 label, then query by id or by type.
@@ -17,10 +17,10 @@ package's siblings are not pulled in automatically. Paste the whole block into
 ```jsonc
 "dependencies": {
   "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
-  "com.uni-tx.ioc": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.2.0",
-  "com.uni-tx.core": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.2.0",
-  "com.uni-tx.resources": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.2.0",
-  "com.uni-tx.content": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.2.0"
+  "com.uni-tx.ioc": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.3.0",
+  "com.uni-tx.core": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.3.0",
+  "com.uni-tx.resources": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.3.0",
+  "com.uni-tx.content": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.3.0"
 }
 ```
 
@@ -31,15 +31,17 @@ Use this exact order — dependencies before dependents, or the editor throws tr
 compile errors between adds:
 
 1. `https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11`
-2. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.2.0`
-3. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.2.0`
-4. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.2.0`
-5. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.2.0`
+2. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.3.0`
+3. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.3.0`
+4. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.3.0`
+5. `https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.3.0`
 
 </details>
 
 - **UniTx dependencies:** `com.uni-tx.ioc`, `com.uni-tx.core`, `com.uni-tx.resources`
-- **Unity registry dependencies:** none
+- **Unity registry dependencies** (resolved automatically by UPM):
+  - `com.unity.modules.jsonserialize` 1.0.0 (JsonUtility)
+  - `com.unity.test-framework` 1.4.6 (the shipped Tests/ assemblies)
 
 > `com.uni-tx.core` ships a dependency doctor that reports exactly which packages are
 > missing, so a partial install fails with an explanation rather than a wall of
