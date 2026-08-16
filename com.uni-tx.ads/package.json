@@ -1,0 +1,39 @@
+{
+  "name": "com.uni-tx.ads",
+  "version": "1.1.0",
+  "displayName": "UniTx Ads",
+  "description": "SDK-agnostic ads facade for rewarded, interstitial, app-open, banner and MREC placements, with nine-way positioning and safe-area offsetting.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.ads/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.ads/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.ads/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "ads",
+    "monetization",
+    "rewarded",
+    "interstitial",
+    "levelplay",
+    "ironsource",
+    "mrec",
+    "app-open",
+    "banner"
+  ],
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Ads Placements",
+      "description": "Awaiting a rewarded ad result, showing an interstitial with a cooldown, and stubbing a provider in tests.",
+      "path": "Samples~/AdsPlacements"
+    }
+  ]
+}

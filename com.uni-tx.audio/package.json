@@ -1,0 +1,37 @@
+{
+  "name": "com.uni-tx.audio",
+  "version": "1.1.0",
+  "displayName": "UniTx Audio",
+  "description": "Pool-based SFX and music playback with AudioMixer-driven volume, ducking and per-bus mute.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.audio/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.audio/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.audio/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "audio",
+    "sound",
+    "sfx",
+    "music",
+    "audiomixer"
+  ],
+  "dependencies": {
+    "com.unity.modules.audio": "1.0.0"
+  },
+  "samples": [
+    {
+      "displayName": "Audio Playback",
+      "description": "2D/3D/attached SFX, music with crossfade, and mixer-backed volume and mute controls.",
+      "path": "Samples~/AudioPlayback"
+    }
+  ]
+}

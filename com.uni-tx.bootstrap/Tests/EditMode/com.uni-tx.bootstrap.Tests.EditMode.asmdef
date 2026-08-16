@@ -1,0 +1,31 @@
+{
+    "name": "com.uni-tx.bootstrap.Tests.EditMode",
+    "references": [
+        "GUID:8c24ff52f82131afc08caf52a4b39529",
+        "GUID:88de943b63bc077d4afbf64705e19542",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:b9ce101bda6446da3aa85acd1a47def9",
+        "GUID:ea44fbeda39e372a69d35c3caffc49dc",
+        "GUID:16be72a0fb5c5950c8fdc559adafce1a",
+        "GUID:68530312e62264e4aa84b3fb40888966",
+        "GUID:e0136d16d036af0669721236e5c43410",
+        "GUID:fca8a386b53c6727f074e4847712803e",
+        "GUID:b3ec09af0916429c07b4b7fc3968cd8a",
+        "GUID:02cc419b39abf469fbe04536cb78b5a9"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

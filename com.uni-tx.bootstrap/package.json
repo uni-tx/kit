@@ -1,0 +1,34 @@
+{
+  "name": "com.uni-tx.bootstrap",
+  "version": "1.1.0",
+  "displayName": "UniTx Bootstrap",
+  "description": "Concrete loading steps that wire the whole UniTx kit together in the right order.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.bootstrap/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.bootstrap/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.bootstrap/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "bootstrap",
+    "loading",
+    "startup",
+    "wiring"
+  ],
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Full Bootstrap",
+      "description": "A complete AppLoader scene wiring config, IoC bindings and every UniTx service.",
+      "path": "Samples~/FullBootstrap"
+    }
+  ]
+}

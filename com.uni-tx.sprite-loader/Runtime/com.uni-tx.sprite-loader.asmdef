@@ -1,0 +1,19 @@
+{
+    "name": "com.uni-tx.sprite-loader",
+    "rootNamespace": "UniTx.SpriteLoader",
+    "references": [
+        "GUID:88de943b63bc077d4afbf64705e19542",
+        "GUID:ea44fbeda39e372a69d35c3caffc49dc",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:2bafac87e7f4b9b418d9448d219b01ab"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,34 @@
+{
+  "name": "com.uni-tx.pooling",
+  "version": "1.1.0",
+  "displayName": "UniTx Pooling",
+  "description": "DI-aware GameObject pooling built on UnityEngine.Pool with lifecycle hooks and typed data injection.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.pooling/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.pooling/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.pooling/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "pooling",
+    "object-pool",
+    "performance",
+    "gc"
+  ],
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Projectile Pool",
+      "description": "A pooled projectile with Initialize/Reset hooks, typed spawn data and automatic return.",
+      "path": "Samples~/ProjectilePool"
+    }
+  ]
+}

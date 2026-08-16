@@ -1,0 +1,30 @@
+[
+  {
+    "_id": "weapon_pistol",
+    "_displayName": "Sidearm",
+    "_damage": 12,
+    "_fireRate": 3.5,
+    "_tags": ["starter", "hitscan"]
+  },
+  {
+    "_id": "weapon_smg",
+    "_displayName": "Submachine Gun",
+    "_damage": 8,
+    "_fireRate": 11.0,
+    "_tags": ["starter", "automatic", "hitscan"]
+  },
+  {
+    "_id": "weapon_shotgun",
+    "_displayName": "Scattergun",
+    "_damage": 46,
+    "_fireRate": 1.2,
+    "_tags": ["shell", "spread"]
+  },
+  {
+    "_id": "weapon_railgun",
+    "_displayName": "Railgun",
+    "_damage": 90,
+    "_fireRate": 0.6,
+    "_tags": ["energy", "piercing"]
+  }
+]

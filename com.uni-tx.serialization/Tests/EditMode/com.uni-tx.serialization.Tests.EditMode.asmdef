@@ -1,0 +1,24 @@
+{
+    "name": "com.uni-tx.serialization.Tests.EditMode",
+    "references": [
+        "GUID:fca8a386b53c6727f074e4847712803e",
+        "GUID:88de943b63bc077d4afbf64705e19542",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:02cc419b39abf469fbe04536cb78b5a9"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

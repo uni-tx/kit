@@ -1,0 +1,22 @@
+{
+    "name": "com.uni-tx.pooling.Tests.PlayMode",
+    "references": [
+        "GUID:3f2dfa0042eb888a0a703058fb745538",
+        "GUID:88de943b63bc077d4afbf64705e19542",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:02cc419b39abf469fbe04536cb78b5a9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

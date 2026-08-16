@@ -1,0 +1,34 @@
+{
+  "name": "com.uni-tx.ioc",
+  "version": "1.1.0",
+  "displayName": "UniTx IoC",
+  "description": "Lightweight, allocation-conscious inversion-of-control container for Unity 6.5+.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.ioc/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.ioc/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.ioc/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "ioc",
+    "di",
+    "dependency-injection",
+    "container"
+  ],
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Basic Container",
+      "description": "Binding, resolving and unbinding services, including ResolveAll bulk passes.",
+      "path": "Samples~/BasicContainer"
+    }
+  ]
+}

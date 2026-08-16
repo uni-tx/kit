@@ -1,0 +1,18 @@
+{
+    "name": "com.uni-tx.serialization",
+    "rootNamespace": "UniTx.Serialization",
+    "references": [
+        "GUID:88de943b63bc077d4afbf64705e19542",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:02cc419b39abf469fbe04536cb78b5a9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

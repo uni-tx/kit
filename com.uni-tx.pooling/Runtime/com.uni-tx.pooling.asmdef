@@ -1,0 +1,17 @@
+{
+    "name": "com.uni-tx.pooling",
+    "rootNamespace": "UniTx.Pooling",
+    "references": [
+        "GUID:88de943b63bc077d4afbf64705e19542",
+        "GUID:02cc419b39abf469fbe04536cb78b5a9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

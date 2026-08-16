@@ -1,0 +1,33 @@
+{
+  "name": "com.uni-tx.entity",
+  "version": "1.1.0",
+  "displayName": "UniTx Entity",
+  "description": "Runtime entities that combine static content data with persisted saved data.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.entity/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.entity/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.entity/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "entity",
+    "gameplay",
+    "model"
+  ],
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Entity Demo",
+      "description": "An entity backed by content data and a save file, wired through the entity service.",
+      "path": "Samples~/EntityDemo"
+    }
+  ]
+}

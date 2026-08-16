@@ -1,0 +1,36 @@
+{
+  "name": "com.uni-tx.tweening",
+  "version": "1.1.0",
+  "displayName": "UniTx Tweening",
+  "description": "Allocation-light UniTask tween engine for transforms, colors and arbitrary values, with easing and awaitable sequencing.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.tweening/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.tweening/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.tweening/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "tweening",
+    "tween",
+    "animation",
+    "easing"
+  ],
+  "dependencies": {
+    "com.unity.modules.ui": "1.0.0"
+  },
+  "samples": [
+    {
+      "displayName": "Tween Gallery",
+      "description": "Move/scale/rotate/fade tweens, custom value tweens, easing curves and awaited sequences.",
+      "path": "Samples~/TweenGallery"
+    }
+  ]
+}

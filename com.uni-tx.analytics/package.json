@@ -1,0 +1,34 @@
+{
+  "name": "com.uni-tx.analytics",
+  "version": "1.1.0",
+  "displayName": "UniTx Analytics",
+  "description": "SDK-agnostic analytics facade with batching and a debug provider; adapters plug in behind version defines.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.analytics/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.analytics/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.analytics/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "analytics",
+    "telemetry",
+    "events",
+    "tracking"
+  ],
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Analytics Providers",
+      "description": "Logging typed events through the facade, and writing a custom provider adapter.",
+      "path": "Samples~/AnalyticsProviders"
+    }
+  ]
+}

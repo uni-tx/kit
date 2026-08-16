@@ -1,0 +1,28 @@
+{
+    "name": "com.uni-tx.localization",
+    "rootNamespace": "UniTx.Localization",
+    "references": [
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:88de943b63bc077d4afbf64705e19542",
+        "Unity.Localization",
+        "Unity.ResourceManager",
+        "UniTask.Addressables"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITX_LOCALIZATION"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.localization",
+            "expression": "1.5.0",
+            "define": "UNITX_LOCALIZATION"
+        }
+    ],
+    "noEngineReferences": false
+}

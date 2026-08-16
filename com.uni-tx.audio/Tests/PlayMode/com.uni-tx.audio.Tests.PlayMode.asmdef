@@ -1,0 +1,26 @@
+{
+    "name": "com.uni-tx.audio.Tests.PlayMode",
+    "references": [
+        "GUID:16be72a0fb5c5950c8fdc559adafce1a",
+        "GUID:88de943b63bc077d4afbf64705e19542",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:3f2dfa0042eb888a0a703058fb745538",
+        "GUID:02cc419b39abf469fbe04536cb78b5a9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
