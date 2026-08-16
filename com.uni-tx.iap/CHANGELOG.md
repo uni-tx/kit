@@ -8,6 +8,22 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-08-17
+
+### Changed
+
+- Version bump only; all UniTx packages are released in lockstep. This release adds
+  `com.uni-tx.season-pass` as the kit's eighteenth package.
+
+## [1.3.0] - 2026-08-16
+
+### Changed
+
+- Declared every Unity registry package this package's runtime code actually uses.
+  Registry dependencies — unlike git URLs — do resolve from a package's own
+  `package.json`, so declaring them is what makes a single-package install work; omitting
+  one left consumers with a `CS0246` for a type they never asked about.
+
 ## [1.2.0] - 2026-08-16
 
 ### Added

@@ -1,0 +1,44 @@
+{
+  "name": "com.uni-tx.season-pass",
+  "version": "1.4.0",
+  "displayName": "UniTx Season Pass",
+  "description": "Seasonal battle pass with free and paid reward tracks, monotonic XP, capped earn sources, quests, tier skips, retroactive unlocks, configurable expiry and a backend seam for server authority.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.season-pass/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.season-pass/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.season-pass/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "season-pass",
+    "battle-pass",
+    "liveops",
+    "progression",
+    "rewards",
+    "monetization",
+    "retention"
+  ],
+  "dependencies": {
+    "com.unity.test-framework": "1.4.6"
+  },
+  "samples": [
+    {
+      "displayName": "Season Pass Flow",
+      "description": "The whole lifecycle in one script: earning capped XP, unlocking the paid track mid-season with a retroactive back-grant, buying tier skips, and forcing a rollover that archives progress while keeping what the player owns.",
+      "path": "Samples~/SeasonPassFlow"
+    },
+    {
+      "displayName": "Season Pass Screen",
+      "description": "A uGUI track/tier/claim screen driven by the service's change event. Needs com.uni-tx.widgets and com.uni-tx.sprite-loader; without them the sample's assembly is skipped rather than breaking the project.",
+      "path": "Samples~/SeasonPassScreen"
+    }
+  ]
+}

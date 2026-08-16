@@ -1,0 +1,57 @@
+[
+  {
+    "_id": "season_summer",
+    "_displayName": "Summer Splash",
+    "_startUtc": "2026-01-01T00:00:00Z",
+    "_endUtc": "2030-01-01T00:00:00Z",
+    "_claimGraceHours": 48,
+    "_endingSoonHours": 72,
+    "_bonusTierXp": 500,
+    "_bonusTierRewards": [
+      { "_rewardId": "bonus_coins", "_track": 0, "_kind": 0, "_itemId": "coins", "_amount": 250 }
+    ],
+    "_tiers": [
+      { "_tier": 1, "_requiredXp": 100, "_rewards": [
+        { "_rewardId": "t1_coins", "_track": 0, "_kind": 0, "_itemId": "coins", "_amount": 100 },
+        { "_rewardId": "t1_gems", "_track": 1, "_kind": 0, "_itemId": "gems", "_amount": 25 }
+      ] },
+      { "_tier": 2, "_requiredXp": 300, "_rewards": [
+        { "_rewardId": "t2_energy", "_track": 0, "_kind": 1, "_itemId": "energy_refill", "_amount": 1 },
+        { "_rewardId": "t2_booster", "_track": 1, "_kind": 3, "_itemId": "xp_boost_1h", "_amount": 2 }
+      ] },
+      { "_tier": 3, "_requiredXp": 600, "_rewards": [
+        { "_rewardId": "t3_coins", "_track": 0, "_kind": 0, "_itemId": "coins", "_amount": 300 },
+        { "_rewardId": "t3_skin", "_track": 1, "_kind": 2, "_itemId": "skin_summer_hero",
+          "_amount": 1, "_iconAddress": "icons/skin_summer_hero", "_isHighlight": true }
+      ] },
+      { "_tier": 4, "_requiredXp": 1000, "_rewards": [
+        { "_rewardId": "t4_gems", "_track": 0, "_kind": 0, "_itemId": "gems", "_amount": 50 },
+        { "_rewardId": "t4_emote", "_track": 2, "_kind": 2, "_itemId": "emote_cannonball", "_amount": 1 }
+      ] }
+    ],
+    "_trackOffers": [
+      { "_track": 1, "_productId": "com.example.game.pass.summer", "_currencyId": "gems",
+        "_currencyCost": 500, "_includedTierSkips": 0 },
+      { "_track": 2, "_productId": "com.example.game.pass.summer.deluxe", "_currencyId": "",
+        "_currencyCost": 0, "_includedTierSkips": 10 }
+    ],
+    "_xpSources": [
+      { "_sourceId": "match_complete", "_xpPerEvent": 50, "_dailyCap": 500 },
+      { "_sourceId": "daily_login", "_xpPerEvent": 100, "_dailyCap": 100 },
+      { "_sourceId": "premium_match_bonus", "_xpPerEvent": 25, "_dailyCap": 0,
+        "_requiresPaidTrack": true }
+    ],
+    "_quests": [
+      { "_questId": "daily_win", "_description": "Win 2 matches", "_scope": 0, "_goal": 2,
+        "_xpReward": 150 },
+      { "_questId": "weekly_streak", "_description": "Play on 5 days", "_scope": 1, "_goal": 5,
+        "_xpReward": 500 },
+      { "_questId": "season_collector", "_description": "Collect 10 shells", "_scope": 2,
+        "_goal": 10, "_xpReward": 1000, "_requiresPaidTrack": true }
+    ],
+    "_tierSkipProductId": "com.example.game.pass.summer.skip",
+    "_tierSkipCurrencyId": "gems",
+    "_tierSkipCurrencyCost": 150,
+    "_maxTierSkipPurchases": 20
+  }
+]

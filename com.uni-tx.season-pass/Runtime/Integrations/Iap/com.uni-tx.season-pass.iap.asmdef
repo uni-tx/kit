@@ -1,0 +1,28 @@
+{
+    "name": "com.uni-tx.season-pass.iap",
+    "rootNamespace": "UniTx.SeasonPass.Integrations",
+    "references": [
+        "com.uni-tx.season-pass",
+        "com.uni-tx.core",
+        "com.uni-tx.ioc",
+        "com.uni-tx.iap",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITX_SEASON_PASS_IAP"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.uni-tx.iap",
+            "expression": "1.4.0",
+            "define": "UNITX_SEASON_PASS_IAP"
+        }
+    ],
+    "noEngineReferences": false
+}
