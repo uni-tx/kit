@@ -8,6 +8,13 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-08-17
+
+### Changed
+
+- The `SeasonPassScreen` sample README's package pins now point at the released tags.
+- Version bump only; all UniTx packages are released in lockstep.
+
 ## [1.6.0] - 2026-08-17
 
 ### Changed

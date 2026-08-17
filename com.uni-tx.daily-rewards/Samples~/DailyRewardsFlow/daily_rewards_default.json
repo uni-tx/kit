@@ -5,13 +5,13 @@
     "_mode": 0,
     "_loop": true,
     "_slots": [
-      { "_day": 1, "_rewardId": "d1_coins", "_kind": 0, "_itemId": "coins", "_amount": 50 },
-      { "_day": 2, "_rewardId": "d2_gems",  "_kind": 0, "_itemId": "gems",  "_amount": 2 },
-      { "_day": 3, "_rewardId": "d3_coins", "_kind": 0, "_itemId": "coins", "_amount": 100 },
-      { "_day": 4, "_rewardId": "d4_gems",  "_kind": 0, "_itemId": "gems",  "_amount": 5 },
-      { "_day": 5, "_rewardId": "d5_coins", "_kind": 0, "_itemId": "coins", "_amount": 200 },
-      { "_day": 6, "_rewardId": "d6_gems",  "_kind": 0, "_itemId": "gems",  "_amount": 10 },
-      { "_day": 7, "_rewardId": "d7_chest", "_kind": 1, "_itemId": "chest", "_amount": 1, "_isMilestone": true }
+      { "_day": 1, "_rewardId": "d1_coins", "_kind": 0, "_itemId": "coins", "_amount": 50, "_iconAddress": "icon_d1_coins" },
+      { "_day": 2, "_rewardId": "d2_gems",  "_kind": 0, "_itemId": "gems",  "_amount": 2, "_iconAddress": "icon_d2_gems" },
+      { "_day": 3, "_rewardId": "d3_coins", "_kind": 0, "_itemId": "coins", "_amount": 100, "_iconAddress": "icon_d3_coins" },
+      { "_day": 4, "_rewardId": "d4_gems",  "_kind": 0, "_itemId": "gems",  "_amount": 5, "_iconAddress": "icon_d4_gems" },
+      { "_day": 5, "_rewardId": "d5_coins", "_kind": 0, "_itemId": "coins", "_amount": 200, "_iconAddress": "icon_d5_coins" },
+      { "_day": 6, "_rewardId": "d6_gems",  "_kind": 0, "_itemId": "gems",  "_amount": 10, "_iconAddress": "icon_d6_gems" },
+      { "_day": 7, "_rewardId": "d7_chest", "_kind": 1, "_itemId": "chest", "_amount": 1, "_isMilestone": true, "_iconAddress": "icon_d7_chest" }
     ]
   }
 ]

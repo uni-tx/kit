@@ -17,16 +17,16 @@ UPM cannot resolve git dependencies declared inside a package, so paste the whol
 ```jsonc
 "dependencies": {
   "com.cysharp.unitask":     "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
-  "com.uni-tx.ioc":          "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.6.0",
-  "com.uni-tx.core":         "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.6.0",
-  "com.uni-tx.events":       "https://github.com/uni-tx/kit.git?path=/com.uni-tx.events#events@1.6.0",
-  "com.uni-tx.resources":    "https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.6.0",
-  "com.uni-tx.content":      "https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.6.0",
-  "com.uni-tx.serialization":"https://github.com/uni-tx/kit.git?path=/com.uni-tx.serialization#serialization@1.6.0",
-  "com.uni-tx.entity":       "https://github.com/uni-tx/kit.git?path=/com.uni-tx.entity#entity@1.6.0",
-  "com.uni-tx.currency":     "https://github.com/uni-tx/kit.git?path=/com.uni-tx.currency#currency@1.6.0",
-  "com.uni-tx.rewards":      "https://github.com/uni-tx/kit.git?path=/com.uni-tx.rewards#rewards@1.6.0",
-  "com.uni-tx.daily-rewards":"https://github.com/uni-tx/kit.git?path=/com.uni-tx.daily-rewards#daily-rewards@1.6.0"
+  "com.uni-tx.ioc":          "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.7.0",
+  "com.uni-tx.core":         "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.7.0",
+  "com.uni-tx.events":       "https://github.com/uni-tx/kit.git?path=/com.uni-tx.events#events@1.7.0",
+  "com.uni-tx.resources":    "https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.7.0",
+  "com.uni-tx.content":      "https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.7.0",
+  "com.uni-tx.serialization":"https://github.com/uni-tx/kit.git?path=/com.uni-tx.serialization#serialization@1.7.0",
+  "com.uni-tx.entity":       "https://github.com/uni-tx/kit.git?path=/com.uni-tx.entity#entity@1.7.0",
+  "com.uni-tx.currency":     "https://github.com/uni-tx/kit.git?path=/com.uni-tx.currency#currency@1.7.0",
+  "com.uni-tx.rewards":      "https://github.com/uni-tx/kit.git?path=/com.uni-tx.rewards#rewards@1.7.0",
+  "com.uni-tx.daily-rewards":"https://github.com/uni-tx/kit.git?path=/com.uni-tx.daily-rewards#daily-rewards@1.7.0"
 }
 ```
 
@@ -121,8 +121,8 @@ because `JsonUtility` maps fields, not properties.
   "_mode": 0,
   "_loop": true,
   "_slots": [
-    { "_day": 1, "_rewardId": "d1_coins", "_kind": 0, "_itemId": "coins", "_amount": 50 },
-    { "_day": 7, "_rewardId": "d7_chest", "_kind": 1, "_itemId": "chest", "_amount": 1, "_isMilestone": true }
+    { "_day": 1, "_rewardId": "d1_coins", "_kind": 0, "_itemId": "coins", "_amount": 50, "_iconAddress": "icon_d1_coins" },
+    { "_day": 7, "_rewardId": "d7_chest", "_kind": 1, "_itemId": "chest", "_amount": 1, "_isMilestone": true, "_iconAddress": "icon_d7_chest" }
   ]
 }]
 ```
@@ -178,4 +178,5 @@ If you want a server later, `IDailyRewardsBackend` is the seam — no call site 
 **Call `RefreshAsync` on resume and when the screen opens.** Nothing else drives the passage
 of time — a session left open across a reset boundary notices only when it runs.
 
-Sample: **Daily Rewards Flow** (headless, the whole lifecycle on a manual clock).
+Sample: **Daily Rewards Flow** (headless, the whole lifecycle on a manual clock) and
+**Daily Rewards Screen** (uGUI, needs widgets and sprite-loader).

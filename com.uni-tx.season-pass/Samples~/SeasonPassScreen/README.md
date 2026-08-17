@@ -9,8 +9,8 @@ with an unclaimed badge; and a buy button that disappears once the track is owne
 This sample needs two more UniTx packages beyond the season pass's own install chain:
 
 ```jsonc
-"com.uni-tx.widgets":       "https://github.com/uni-tx/kit.git?path=/com.uni-tx.widgets#widgets@1.4.0",
-"com.uni-tx.sprite-loader": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.sprite-loader#sprite-loader@1.4.0"
+"com.uni-tx.widgets":       "https://github.com/uni-tx/kit.git?path=/com.uni-tx.widgets#widgets@1.7.0",
+"com.uni-tx.sprite-loader": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.sprite-loader#sprite-loader@1.7.0"
 ```
 
 Its assembly is constrained on both, so importing the sample without them **skips** the

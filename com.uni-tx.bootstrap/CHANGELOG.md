@@ -8,6 +8,14 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-08-17
+
+### Changed
+
+- Version bump only; all UniTx packages are released in lockstep. This release adds the
+  `DailyRewardsScreen` uGUI sample to `com.uni-tx.daily-rewards` and a mandatory
+  dev-to-public sync verification rule.
+
 ## [1.6.0] - 2026-08-17
 
 ### Changed

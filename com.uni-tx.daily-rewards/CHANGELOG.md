@@ -8,6 +8,14 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-08-17
+
+### Added
+
+- `DailyRewardsScreen` sample — a uGUI calendar screen (widgets + sprite-loader) that
+  repaints from `OnChanged`, dims future slots instead of hiding them, and claims from
+  today's slot. The flow sample's slots now ship `_iconAddress` values for its cells.
+
 ## [1.6.0] - 2026-08-17
 
 ### Added

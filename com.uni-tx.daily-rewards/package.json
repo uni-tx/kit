@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.daily-rewards",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "displayName": "UniTx Daily Rewards",
   "description": "Daily login reward calendars as entities: a configurable UTC reset hour, calendar and streak modes, looped or finite calendars, one idempotent claim per day, and failed deliveries queued for retry.",
   "unity": "6000.5",
@@ -32,6 +32,11 @@
       "displayName": "Daily Rewards Flow",
       "description": "A seven-day looping calendar walked through a manual clock: claiming day by day, skipping a missed day, and watching the streak break and recover.",
       "path": "Samples~/DailyRewardsFlow"
+    },
+    {
+      "displayName": "Daily Rewards Screen",
+      "description": "A uGUI calendar screen: header with streak and countdown, day cells with reward icons and a milestone badge, and a claim button that only appears on today's slot. Needs com.uni-tx.widgets and com.uni-tx.sprite-loader; without them the sample's assembly is skipped rather than breaking the project.",
+      "path": "Samples~/DailyRewardsScreen"
     }
   ]
 }

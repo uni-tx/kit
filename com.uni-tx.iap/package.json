@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.iap",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "displayName": "UniTx IAP",
   "description": "SDK-agnostic in-app purchase facade with awaitable purchases, restore handling, entitlement fan-out and a Unity IAP 5.x adapter.",
   "unity": "6000.5",
