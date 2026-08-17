@@ -1,0 +1,37 @@
+{
+  "name": "com.uni-tx.daily-rewards",
+  "version": "1.6.0",
+  "displayName": "UniTx Daily Rewards",
+  "description": "Daily login reward calendars as entities: a configurable UTC reset hour, calendar and streak modes, looped or finite calendars, one idempotent claim per day, and failed deliveries queued for retry.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.daily-rewards/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.daily-rewards/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.daily-rewards/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "daily-rewards",
+    "login",
+    "streak",
+    "retention",
+    "liveops"
+  ],
+  "dependencies": {
+    "com.unity.test-framework": "1.4.6"
+  },
+  "samples": [
+    {
+      "displayName": "Daily Rewards Flow",
+      "description": "A seven-day looping calendar walked through a manual clock: claiming day by day, skipping a missed day, and watching the streak break and recover.",
+      "path": "Samples~/DailyRewardsFlow"
+    }
+  ]
+}

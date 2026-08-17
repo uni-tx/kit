@@ -8,6 +8,14 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-08-17
+
+### Changed
+
+- Version bump only; all UniTx packages are released in lockstep. This release adds
+  `com.uni-tx.daily-rewards` as the kit's twenty-first package, and
+  `DailyRewardsStep` for bootstrapping it.
+
 ## [1.5.0] - 2026-08-17
 
 ### Added

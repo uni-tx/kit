@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.rewards",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "displayName": "UniTx Rewards",
   "description": "Generic reward definitions and a kind-routing delivery service: currency rewards land in the currency system, item/cosmetic/booster rewards land on entities, with idempotent grant ids and change events.",
   "unity": "6000.5",

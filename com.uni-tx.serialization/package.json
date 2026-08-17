@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.serialization",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "displayName": "UniTx Serialization",
   "description": "Batched, atomic JSON save/load to persistent storage with flush-on-pause and schema migration.",
   "unity": "6000.5",

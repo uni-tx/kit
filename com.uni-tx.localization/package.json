@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.localization",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "displayName": "UniTx Localization",
   "description": "Thin UniTx-flavoured facade over Unity's Localization package: async locale switching and key lookup.",
   "unity": "6000.5",
