@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UniTx.Content;
 using UniTx.IoC;
 
@@ -8,7 +11,7 @@ namespace UniTx.Entity
     /// <summary>
     /// Registers, loads, and unloads entities described by the content service.
     /// </summary>
-    public sealed class EntityService : IEntityService, IEntityLoader
+    public sealed class EntityService : IEntityService
     {
         private readonly IDictionary<string, IEntity> _registry;
         private readonly IContentService _contentService;
@@ -28,24 +31,48 @@ namespace UniTx.Entity
         public EntityService(IResolver resolver)
         {
             _registry = new Dictionary<string, IEntity>();
-            _resolver = resolver ?? throw new System.ArgumentNullException(nameof(resolver));
+            _resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
             _contentService = _resolver.Resolve<IContentService>();
         }
 
         /// <summary>
         /// Creates and registers all entities described by the loaded content data.
         /// </summary>
-        public void LoadEntities()
+        /// <param name="cToken">Token to cancel the load.</param>
+        public async UniTask LoadEntitiesAsync(CancellationToken cToken = default)
         {
             var data = _contentService.GetAllData<IEntityData>();
 
             foreach (var datum in data)
             {
+                cToken.ThrowIfCancellationRequested();
+
                 var entity = datum.CreateEntity();
                 entity.Inject(_resolver);
-                entity.Initialize();
+                await entity.InitializeAsync(cToken);
+
                 _registry[entity.Id] = entity;
             }
+        }
+
+        /// <summary>
+        /// Registers an entity explicitly.
+        /// </summary>
+        /// <param name="entity">The entity to register.</param>
+        public void Register(IEntity entity)
+        {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
+            _registry[entity.Id] = entity;
+        }
+
+        /// <summary>
+        /// Removes an entity from the registry without resetting it.
+        /// </summary>
+        /// <param name="entity">The entity to unregister.</param>
+        public void Unregister(IEntity entity)
+        {
+            if (entity != null) _registry.Remove(entity.Id);
         }
 
         /// <summary>
@@ -75,7 +102,31 @@ namespace UniTx.Entity
                 return typedEntity;
             }
 
-            throw new KeyNotFoundException($"Entity with Id '{id}' not found.");
+            // "Not found" for an id that is registered under another type sends the caller
+            // hunting for a missing registration that is not missing at all.
+            throw new KeyNotFoundException(entity == null
+                ? $"Entity with Id '{id}' not found."
+                : $"Entity with Id '{id}' is a {entity.GetType().Name}, not a {typeof(TEntity).Name}.");
+        }
+
+        /// <summary>
+        /// Retrieves the entity with the given id, without throwing.
+        /// </summary>
+        /// <typeparam name="TEntity">The entity type to cast to.</typeparam>
+        /// <param name="id">The unique entity id.</param>
+        /// <param name="entity">The matching entity, or null.</param>
+        /// <returns><c>true</c> when a matching entity of the requested type was found.</returns>
+        public bool TryGet<TEntity>(string id, out TEntity entity)
+            where TEntity : IEntity
+        {
+            if (id != null && _registry.TryGetValue(id, out var found) && found is TEntity typed)
+            {
+                entity = typed;
+                return true;
+            }
+
+            entity = default;
+            return false;
         }
 
         /// <summary>

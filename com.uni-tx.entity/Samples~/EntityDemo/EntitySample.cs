@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UniTx.Content;
 using UniTx.IoC;
 using UniTx.Serialization;
@@ -121,8 +123,12 @@ namespace UniTx.Entity.Samples
         }
 
         /// <inheritdoc />
-        protected override void OnInit()
-            => Debug.Log($"{Data.Name} ready: level {SavedData.Level}, attack {Attack}, hp {MaxHealth}");
+        protected override UniTask OnInitAsync(CancellationToken cToken)
+        {
+            Debug.Log($"{Data.Name} ready: level {SavedData.Level}, attack {Attack}, hp {MaxHealth}");
+
+            return UniTask.CompletedTask;
+        }
 
         /// <inheritdoc />
         protected override void OnReset() => Debug.Log($"{Id} unloaded");
@@ -148,20 +154,33 @@ namespace UniTx.Entity.Samples
     {
         private EntityService _entities;
 
-        private void Start()
+        private void Start() => LoadAsync().Forget();
+
+        private async UniTaskVoid LoadAsync()
         {
-            // Content must already be loaded — EntityService builds entities from the
-            // IEntityData objects the content service is holding.
-            ContentRegistry.Register<HeroData>("heroes");
-
-            _entities = new EntityService(IoCStatics.Resolver);
-
-            // Creates, injects and initializes one entity per IEntityData in content.
-            _entities.LoadEntities();
-
-            foreach (var hero in _entities.GetAll<Hero>().OrderBy(h => h.Id))
+            try
             {
-                Debug.Log($"{hero.Id}: attack {hero.Attack}");
+                // Content must already be loaded — EntityService builds entities from the
+                // IEntityData objects the content service is holding.
+                ContentRegistry.Register<HeroData>("heroes");
+
+                _entities = new EntityService(IoCStatics.Resolver);
+
+                // Creates, injects and initializes one entity per IEntityData in content.
+                await _entities.LoadEntitiesAsync(this.GetCancellationTokenOnDestroy());
+
+                foreach (var hero in _entities.GetAll<Hero>().OrderBy(h => h.Id))
+                {
+                    Debug.Log($"{hero.Id}: attack {hero.Attack}");
+                }
+            }
+            catch (System.OperationCanceledException)
+            {
+                // Expected when the sample is destroyed mid-load.
+            }
+            catch (System.Exception exception)
+            {
+                Debug.LogException(exception);
             }
         }
 

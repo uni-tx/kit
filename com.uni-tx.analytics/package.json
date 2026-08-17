@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.analytics",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "displayName": "UniTx Analytics",
   "description": "SDK-agnostic analytics facade with batching and a debug provider; adapters plug in behind version defines.",
   "unity": "6000.5",

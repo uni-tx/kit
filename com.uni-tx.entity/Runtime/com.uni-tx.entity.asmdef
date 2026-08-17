@@ -2,6 +2,7 @@
     "name": "com.uni-tx.entity",
     "rootNamespace": "UniTx.Entity",
     "references": [
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
         "GUID:88de943b63bc077d4afbf64705e19542",
         "GUID:02cc419b39abf469fbe04536cb78b5a9",
         "GUID:e0136d16d036af0669721236e5c43410",

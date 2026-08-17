@@ -19,17 +19,26 @@ UPM cannot resolve git dependencies declared inside a package, so paste the whol
 ```jsonc
 "dependencies": {
   "com.cysharp.unitask":     "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
-  "com.uni-tx.ioc":          "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.4.0",
-  "com.uni-tx.core":         "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.4.0",
-  "com.uni-tx.events":       "https://github.com/uni-tx/kit.git?path=/com.uni-tx.events#events@1.4.0",
-  "com.uni-tx.resources":    "https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.4.0",
-  "com.uni-tx.content":      "https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.4.0",
-  "com.uni-tx.serialization":"https://github.com/uni-tx/kit.git?path=/com.uni-tx.serialization#serialization@1.4.0",
-  "com.uni-tx.season-pass":  "https://github.com/uni-tx/kit.git?path=/com.uni-tx.season-pass#season-pass@1.4.0"
+  "com.uni-tx.ioc":          "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.5.0",
+  "com.uni-tx.core":         "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.5.0",
+  "com.uni-tx.events":       "https://github.com/uni-tx/kit.git?path=/com.uni-tx.events#events@1.5.0",
+  "com.uni-tx.resources":    "https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.5.0",
+  "com.uni-tx.content":      "https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.5.0",
+  "com.uni-tx.serialization":"https://github.com/uni-tx/kit.git?path=/com.uni-tx.serialization#serialization@1.5.0",
+  "com.uni-tx.entity":       "https://github.com/uni-tx/kit.git?path=/com.uni-tx.entity#entity@1.5.0",
+  "com.uni-tx.currency":     "https://github.com/uni-tx/kit.git?path=/com.uni-tx.currency#currency@1.5.0",
+  "com.uni-tx.rewards":      "https://github.com/uni-tx/kit.git?path=/com.uni-tx.rewards#rewards@1.5.0",
+  "com.uni-tx.season-pass":  "https://github.com/uni-tx/kit.git?path=/com.uni-tx.season-pass#season-pass@1.5.0"
 }
 ```
 
-Optional, and picked up automatically when present: `com.uni-tx.iap` enables
+`com.uni-tx.entity` is the foundation the pass builds on — its static and saved data live
+in a `SeasonPassEntity`, with a stable save key and the season id as the content key.
+`com.uni-tx.currency` and `com.uni-tx.rewards` are the defaults for selling the paid track
+and delivering rewards; both are picked up automatically when present, and either can be
+replaced by binding your own `ISeasonPassWallet` / `ISeasonPassRewardGranter`.
+
+Also optional, and picked up automatically when present: `com.uni-tx.iap` enables
 `SeasonPassIapBridge`, `com.uni-tx.analytics` enables `SeasonPassAnalytics`. Neither is a
 declared dependency, so a game that sells nothing is not made to ship a billing SDK.
 
@@ -167,9 +176,10 @@ before it reaches the wire. They are not a substitute for validating on the serv
 
 ## Notes
 
-**Why not `com.uni-tx.entity`?** `EntityBase` keys content and saved data under one id. A season
-pass has a content id that changes every season and a save key that must not, so the base class
-would fight the one invariant that makes rollover safe.
+**Built on `com.uni-tx.entity`.** `SeasonPassEntity` pairs the season definition (static
+content, keyed by the season id) with the player's progress (saved data, keyed by the stable
+save id). The two keys being independent is exactly what makes rollover safe — the save never
+moves while the content re-points every season.
 
 **Call `RefreshAsync` on resume and when the screen opens.** Nothing else drives the passage of
 time — a session left open across a season boundary notices only when it runs.

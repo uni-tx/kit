@@ -8,6 +8,29 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-08-17
+
+### Added
+
+- **Decoupled content and save keys.** `EntityBase<TData, TSavedData>` now takes an
+  optional separate data id, so an entity whose content id changes at runtime — a season
+  rollover — keeps its save under a stable key.
+- `SetDataId` / `ReloadData` for re-pointing and re-fetching static content at runtime.
+- `Register` / `Unregister` / `TryGet` on `IEntityService`, so singleton entities that
+  are not described by content can register explicitly.
+- `SaveAsync(immediate, cToken)` for checkpoint writes that must land now.
+
+### Changed
+
+- **Breaking:** initialization is now async (`InitializeAsync`), matching the kit's async
+  policy; `LoadEntities` is now `LoadEntitiesAsync`.
+- **Breaking:** persistence is now a seam — `LoadSavedDataAsync` / `SaveSavedDataAsync`
+  can be overridden to store through a backend with server authority.
+- `IsReady` is claimed only after `OnInitAsync` completes, so an initialization that
+  cancels or throws never leaves an entity reporting itself ready.
+- This release also adds `com.uni-tx.currency` and `com.uni-tx.rewards`, which build on
+  this package.
+
 ## [1.4.0] - 2026-08-17
 
 ### Changed

@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "coins_50",
+    "_kind": 0,
+    "_itemId": "coins",
+    "_amount": 50,
+    "_iconAddress": "ui/rewards/coins"
+  },
+  {
+    "_id": "sword",
+    "_kind": 1,
+    "_itemId": "inventory",
+    "_amount": 1,
+    "_iconAddress": "ui/rewards/sword"
+  }
+]

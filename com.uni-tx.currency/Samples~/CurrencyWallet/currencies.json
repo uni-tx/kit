@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "coins",
+    "_displayName": "Coins",
+    "_iconAddress": "ui/currency/coins",
+    "_kind": 0,
+    "_initialBalance": 0,
+    "_maxBalance": 0
+  },
+  {
+    "_id": "gems",
+    "_displayName": "Gems",
+    "_iconAddress": "ui/currency/gems",
+    "_kind": 1,
+    "_initialBalance": 0,
+    "_maxBalance": 10000
+  }
+]

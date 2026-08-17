@@ -8,6 +8,25 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-08-17
+
+### Added
+
+- `SeasonPassEntity` — the pass's static and saved data now live in a `com.uni-tx.entity`
+  entity: stable save key, season id as the content key, persistence routed through the
+  backend. The rollover re-points the content key; the save never moves.
+- `SeasonPassCurrencyWallet` — the default wallet now spends through `com.uni-tx.currency`
+  when its service is registered. A balance read of a currency that is not registered yet
+  returns zero rather than throwing, so UI can price a tier skip before content loads.
+- `SeasonPassRewardGranter` — the default granter now delivers through
+  `com.uni-tx.rewards`, with the claim key as the idempotent grant id.
+
+### Changed
+
+- Breaking: `SeasonPassService` now depends on `com.uni-tx.entity`, `com.uni-tx.currency`
+  and `com.uni-tx.rewards`. A game that owns its own economy can still bind its own
+  `ISeasonPassWallet` / `ISeasonPassRewardGranter` and nothing else changes.
+
 ## [1.4.0] - 2026-08-17
 
 ### Added

@@ -43,7 +43,7 @@ namespace UniTx.Bootstrap.Samples
             await content.LoadContentAsync(_contentLabels, cToken);
 
             // Entities are built from content, so this has to come after the load.
-            resolver.Resolve<IEntityLoader>().LoadEntities();
+            await resolver.Resolve<IEntityLoader>().LoadEntitiesAsync(cToken);
 
             // Analytics last: instrumentation should not delay anything the player sees.
             UniAnalytics.Register(new DebugAnalyticsProvider());

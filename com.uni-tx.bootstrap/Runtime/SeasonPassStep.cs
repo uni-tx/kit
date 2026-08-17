@@ -48,8 +48,22 @@ namespace UniTx.Bootstrap
             {
                 service.SetRewardGranter(granter);
             }
+            else if (resolver.TryResolve<UniTx.Rewards.IRewardService>(out var rewards))
+            {
+                // Default on the kit's reward service: currency rewards land in the
+                // currency system, entity rewards land on registered consumer entities.
+                service.SetRewardGranter(new SeasonPassRewardGranter(rewards));
+            }
 
-            if (resolver.TryResolve<ISeasonPassWallet>(out var wallet)) service.SetWallet(wallet);
+            if (resolver.TryResolve<ISeasonPassWallet>(out var wallet))
+            {
+                service.SetWallet(wallet);
+            }
+            else if (resolver.TryResolve<UniTx.Currency.ICurrencyService>(out var currency))
+            {
+                // Default on the kit's entity-based currency service.
+                service.SetWallet(new SeasonPassCurrencyWallet(currency));
+            }
 
             binder.BindInstance(service).AsSingleton().Conclude();
 

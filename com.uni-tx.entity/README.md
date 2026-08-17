@@ -60,9 +60,26 @@ public sealed class Hero : EntityBase<HeroData, HeroSavedData>
     public int Attack => Data.BaseAttack + (SavedData.Level - 1) * 2;
 
     protected override void OnInject(IResolver resolver) { }
-    protected override void OnInit() { }
+
+    protected override UniTask OnInitAsync(CancellationToken cToken)
+    {
+        // Content and saved data are loaded; resolve extra services in OnInject.
+        return UniTask.CompletedTask;
+    }
+
     protected override void OnReset() { }
 }
+```
+
+Content-driven entities register themselves through `LoadEntitiesAsync`; singleton
+entities that are not described by content — a season pass, a wallet — register explicitly
+through `IEntityService.Register`. An entity whose content id changes at runtime but whose
+save key must not (a season rollover) constructs with a separate data id:
+
+```csharp
+var pass = new SeasonPassEntity("season_pass", backend, content); // save key stable
+pass.SetDataId(selectedSeasonId);                                  // content key changes
+pass.ReloadData();
 ```
 
 ## Samples
@@ -75,8 +92,10 @@ Import from **Package Manager ▸ UniTx Entity ▸ Samples**.
 
 - Content ships with the build; saved data belongs to the player. Keeping them apart
   is what lets a balance patch ship without rewriting player progress.
-- `LoadEntities` builds one entity per `IEntityData` in content, so content must be
-  loaded first.
+- `LoadEntitiesAsync` builds one entity per `IEntityData` in content, so content must be
+  loaded first. Entities not described by content register explicitly via `Register`.
+- `Id` is the save key and must be stable; `DataId` is the content key and may change
+  at runtime. Most entities use the same value for both.
 
 ## Conventions
 

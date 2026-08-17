@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.sprite-loader",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "displayName": "UniTx Sprite Loader",
   "description": "Addressables sprite loading for uGUI Image components, with automatic release on destroy.",
   "unity": "6000.5",

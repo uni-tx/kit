@@ -1,0 +1,36 @@
+{
+  "name": "com.uni-tx.rewards",
+  "version": "1.5.0",
+  "displayName": "UniTx Rewards",
+  "description": "Generic reward definitions and a kind-routing delivery service: currency rewards land in the currency system, item/cosmetic/booster rewards land on entities, with idempotent grant ids and change events.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.rewards/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.rewards/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.rewards/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "rewards",
+    "economy",
+    "gameplay",
+    "liveops"
+  ],
+  "dependencies": {
+    "com.unity.test-framework": "1.4.6"
+  },
+  "samples": [
+    {
+      "displayName": "Reward Flow",
+      "description": "Currency and entity rewards delivered through the reward service, showing kind routing and idempotent grant ids.",
+      "path": "Samples~/RewardFlow"
+    }
+  ]
+}

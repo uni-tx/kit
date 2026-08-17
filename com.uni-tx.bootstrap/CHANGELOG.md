@@ -8,6 +8,20 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-08-17
+
+### Added
+
+- `BindDependenciesStep` now binds `CurrencyService` and `RewardService`, so the
+  entity-based economy services are resolvable out of the box.
+- `SeasonPassStep` defaults the pass's wallet and granter to the kit's currency and
+  reward services when the game has not bound its own.
+
+### Changed
+
+- `FullBootstrapSample` loads entities through `LoadEntitiesAsync`.
+- This release also adds `com.uni-tx.currency` and `com.uni-tx.rewards`.
+
 ## [1.4.0] - 2026-08-17
 
 ### Added

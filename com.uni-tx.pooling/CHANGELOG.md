@@ -8,6 +8,14 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-08-17
+
+### Changed
+
+- Version bump only; all UniTx packages are released in lockstep. This release adds
+  `com.uni-tx.currency` and `com.uni-tx.rewards`, and reworks `com.uni-tx.entity`
+  (decoupled content and save keys, async initialization).
+
 ## [1.4.0] - 2026-08-17
 
 ### Changed

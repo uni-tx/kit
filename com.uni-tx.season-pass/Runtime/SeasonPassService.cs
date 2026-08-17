@@ -4,8 +4,11 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Content;
 using UniTx.Core;
+using UniTx.Currency;
+using UniTx.Entity;
 using UniTx.Events;
 using UniTx.IoC;
+using UniTx.Rewards;
 
 namespace UniTx.SeasonPass
 {
@@ -19,6 +22,12 @@ namespace UniTx.SeasonPass
     /// only ever moves up, ownership back-grants what it should, and a rollover archives
     /// instead of deleting. A game calls four or five methods; the invariants are not its
     /// problem.
+    /// </para>
+    /// <para>
+    /// Static and saved data live in a <see cref="SeasonPassEntity"/> — the same entity
+    /// foundation every kit system builds on. The entity's save key is stable while its
+    /// content key (the season id) changes on rollover, and persistence routes through
+    /// <see cref="ISeasonPassBackend"/> so a server can take authority later.
     /// </para>
     /// <para>
     /// Time comes from <see cref="IClock"/> and is passed through a high-water mark, so the
@@ -42,8 +51,7 @@ namespace UniTx.SeasonPass
         private ISeasonPassRewardGranter _granter;
         private ISeasonPassWallet _wallet;
 
-        private SeasonPassSavedData _saved;
-        private SeasonPassData _season;
+        private SeasonPassEntity _entity;
         private SeasonPhase _phase = SeasonPhase.None;
         private bool _hasRaisedEndingSoon;
 
@@ -74,7 +82,7 @@ namespace UniTx.SeasonPass
         public bool IsReady { get; private set; }
 
         /// <inheritdoc />
-        public SeasonPassData Season => _season;
+        public SeasonPassData Season => _entity?.Data;
 
         /// <inheritdoc />
         public SeasonPhase Phase => _phase;
@@ -88,7 +96,12 @@ namespace UniTx.SeasonPass
         /// <summary>
         /// Gets the player's persisted progress, or null before initialization.
         /// </summary>
-        public SeasonPassSavedData SavedData => _saved;
+        public SeasonPassSavedData SavedData => _entity?.SavedData;
+
+        /// <summary>
+        /// Gets the player's persisted progress, or null before initialization.
+        /// </summary>
+        private SeasonPassSavedData Saved => _entity?.SavedData;
 
         /// <inheritdoc />
         public void Inject(IResolver resolver)
@@ -104,8 +117,27 @@ namespace UniTx.SeasonPass
             }
 
             // Optional by design: a game without an economy yet still gets a working pass.
-            if (_granter == null) resolver.TryResolve(out _granter);
-            if (_wallet == null) resolver.TryResolve(out _wallet);
+            if (_granter == null && resolver.TryResolve<ISeasonPassRewardGranter>(out var granter))
+            {
+                _granter = granter;
+            }
+
+            // Defaults on top of the entity foundation: rewards route through the kit's
+            // reward service, currency purchases through the kit's currency service.
+            if (_granter == null && resolver.TryResolve<IRewardService>(out var rewards))
+            {
+                _granter = new SeasonPassRewardGranter(rewards);
+            }
+
+            if (_wallet == null && resolver.TryResolve<ISeasonPassWallet>(out var wallet))
+            {
+                _wallet = wallet;
+            }
+
+            if (_wallet == null && resolver.TryResolve<ICurrencyService>(out var currency))
+            {
+                _wallet = new SeasonPassCurrencyWallet(currency);
+            }
         }
 
         /// <inheritdoc />
@@ -135,9 +167,10 @@ namespace UniTx.SeasonPass
             _granter ??= new LoggingRewardGranter();
             _wallet ??= new NoOpSeasonPassWallet();
 
-            _saved = await _backend.LoadAsync(_config.SaveId, cToken);
-            _saved.Id ??= _config.SaveId;
-            _saved.Migrate();
+            EnsureEntity();
+
+            // Loads the save through the backend and prepares the entity's data half.
+            await _entity.InitializeAsync(cToken);
 
             IsReady = true;
 
@@ -148,14 +181,15 @@ namespace UniTx.SeasonPass
         public void Reset()
         {
             IsReady = false;
-            _saved = null;
-            _season = null;
             _phase = SeasonPhase.None;
             _hasRaisedEndingSoon = false;
 
             _claimBuffer.Clear();
             _workBuffer.Clear();
             _questIdBuffer.Clear();
+
+            _entity?.Reset();
+            _entity = null;
         }
 
         /// <inheritdoc />
@@ -167,14 +201,14 @@ namespace UniTx.SeasonPass
             _wallet = wallet ?? throw new ArgumentNullException(nameof(wallet));
 
         /// <inheritdoc />
-        public bool OwnsTrack(SeasonTrack track) => _saved != null && _saved.Owns(track);
+        public bool OwnsTrack(SeasonTrack track) => Saved != null && Saved.Owns(track);
 
         /// <inheritdoc />
         public bool IsClaimable(SeasonRewardRef reward)
         {
-            if (!IsReady || _season == null || !CanClaim) return false;
-            if (_saved.HasClaimed(reward.ToClaimKey())) return false;
-            if (!_saved.Owns(reward.Track)) return false;
+            if (!IsReady || Season == null || !CanClaim) return false;
+            if (Saved.HasClaimed(reward.ToClaimKey())) return false;
+            if (!Saved.Owns(reward.Track)) return false;
             if (reward.Tier > CurrentTier) return false;
 
             return FindReward(reward) != null;
@@ -187,14 +221,14 @@ namespace UniTx.SeasonPass
 
             buffer.Clear();
 
-            if (!IsReady || _season == null || !CanClaim) return 0;
+            if (!IsReady || Season == null || !CanClaim) return 0;
 
-            SeasonPassCalculator.CollectUnlockedRewards(_season, CurrentTier, _workBuffer);
+            SeasonPassCalculator.CollectUnlockedRewards(Season, CurrentTier, _workBuffer);
 
             foreach (var reward in _workBuffer)
             {
-                if (!_saved.Owns(reward.Track)) continue;
-                if (_saved.HasClaimed(reward.ToClaimKey())) continue;
+                if (!Saved.Owns(reward.Track)) continue;
+                if (Saved.HasClaimed(reward.ToClaimKey())) continue;
 
                 buffer.Add(reward);
             }
@@ -206,13 +240,13 @@ namespace UniTx.SeasonPass
         public async UniTask<XpGrantResult> GrantXpAsync(string sourceId, int amount = 0,
             string grantId = null, CancellationToken cToken = default)
         {
-            if (!IsReady || _season == null) return XpGrantResult.Rejected;
+            if (!IsReady || Season == null) return XpGrantResult.Rejected;
 
-            if (!_season.TryGetXpSource(sourceId, out var source)) return XpGrantResult.UnknownSource;
+            if (!Season.TryGetXpSource(sourceId, out var source)) return XpGrantResult.UnknownSource;
 
             if (!CanEarn) return XpGrantResult.SeasonInactive;
 
-            if (source.RequiresPaidTrack && !_saved.Owns(SeasonTrack.Premium))
+            if (source.RequiresPaidTrack && !Saved.Owns(SeasonTrack.Premium))
             {
                 return XpGrantResult.TrackNotOwned;
             }
@@ -221,7 +255,7 @@ namespace UniTx.SeasonPass
 
             if (requested <= 0) return XpGrantResult.Rejected;
 
-            if (!string.IsNullOrEmpty(grantId) && _saved.HasAppliedGrant(grantId))
+            if (!string.IsNullOrEmpty(grantId) && Saved.HasAppliedGrant(grantId))
             {
                 return XpGrantResult.Duplicate;
             }
@@ -235,7 +269,7 @@ namespace UniTx.SeasonPass
 
             if (source.DailyCap > 0)
             {
-                daily = _saved.GetOrCreateDailyXp(source.SourceId);
+                daily = Saved.GetOrCreateDailyXp(source.SourceId);
                 granted = Math.Min(requested, Math.Max(0, source.DailyCap - daily.Xp));
 
                 if (granted <= 0) return XpGrantResult.Capped;
@@ -254,15 +288,15 @@ namespace UniTx.SeasonPass
         public async UniTask<ClaimResult> ClaimAsync(SeasonRewardRef reward,
             CancellationToken cToken = default)
         {
-            if (!IsReady || _season == null) return ClaimResult.NoSeason;
+            if (!IsReady || Season == null) return ClaimResult.NoSeason;
             if (!CanClaim) return ClaimResult.SeasonExpired;
 
             var data = FindReward(reward);
 
             if (data == null) return ClaimResult.NothingToClaim;
-            if (_saved.HasClaimed(reward.ToClaimKey())) return ClaimResult.AlreadyClaimed;
+            if (Saved.HasClaimed(reward.ToClaimKey())) return ClaimResult.AlreadyClaimed;
             if (reward.Tier > CurrentTier) return ClaimResult.TierNotReached;
-            if (!_saved.Owns(reward.Track)) return ClaimResult.TrackNotOwned;
+            if (!Saved.Owns(reward.Track)) return ClaimResult.TrackNotOwned;
 
             var delivered = await DeliverAsync(data, reward, false, cToken);
 
@@ -277,18 +311,18 @@ namespace UniTx.SeasonPass
         public async UniTask<int> ClaimTierAsync(int tier, SeasonTrack track,
             CancellationToken cToken = default)
         {
-            if (!IsReady || _season == null || !CanClaim) return 0;
-            if (tier > CurrentTier || !_saved.Owns(track)) return 0;
+            if (!IsReady || Season == null || !CanClaim) return 0;
+            if (tier > CurrentTier || !Saved.Owns(track)) return 0;
 
             var claimed = 0;
 
-            foreach (var reward in _season.GetRewards(tier))
+            foreach (var reward in Season.GetRewards(tier))
             {
                 if (reward == null || !reward.IsValid || reward.Track != track) continue;
 
-                var reference = new SeasonRewardRef(_season.Id, tier, track, reward.RewardId);
+                var reference = new SeasonRewardRef(Season.Id, tier, track, reward.RewardId);
 
-                if (_saved.HasClaimed(reference.ToClaimKey())) continue;
+                if (Saved.HasClaimed(reference.ToClaimKey())) continue;
 
                 if (await DeliverAsync(reward, reference, false, cToken)) claimed++;
             }
@@ -305,7 +339,7 @@ namespace UniTx.SeasonPass
         /// <inheritdoc />
         public async UniTask<int> ClaimAllAsync(CancellationToken cToken = default)
         {
-            if (!IsReady || _season == null || !CanClaim) return 0;
+            if (!IsReady || Season == null || !CanClaim) return 0;
 
             var claimed = await RetryFailedClaimsAsync(cToken);
 
@@ -336,15 +370,15 @@ namespace UniTx.SeasonPass
             SeasonPassPayment payment = SeasonPassPayment.Currency,
             CancellationToken cToken = default)
         {
-            if (!IsReady || _season == null || track == SeasonTrack.Free)
+            if (!IsReady || Season == null || track == SeasonTrack.Free)
             {
                 return TrackUnlockResult.Rejected;
             }
 
-            if (_saved.Owns(track)) return TrackUnlockResult.AlreadyOwned;
+            if (Saved.Owns(track)) return TrackUnlockResult.AlreadyOwned;
             if (!CanEarn) return TrackUnlockResult.SeasonInactive;
 
-            var offer = _season.GetOffer(track);
+            var offer = Season.GetOffer(track);
 
             if (offer == null) return TrackUnlockResult.NotPurchasable;
 
@@ -358,11 +392,11 @@ namespace UniTx.SeasonPass
                 }
             }
 
-            var previouslyOwned = _saved.HighestOwnedTrack;
+            var previouslyOwned = Saved.HighestOwnedTrack;
 
-            _saved.GrantTrack(track);
+            Saved.GrantTrack(track);
 
-            Raise(new SeasonTrackUnlocked(_season.Id, track, payment));
+            Raise(new SeasonTrackUnlocked(Season.Id, track, payment));
 
             if (offer.IncludedTierSkips > 0) ApplyTierSkips(offer.IncludedTierSkips);
 
@@ -383,11 +417,11 @@ namespace UniTx.SeasonPass
             SeasonPassPayment payment = SeasonPassPayment.Currency,
             CancellationToken cToken = default)
         {
-            if (!IsReady || _season == null || count <= 0 || !CanEarn) return 0;
+            if (!IsReady || Season == null || count <= 0 || !CanEarn) return 0;
 
-            if (_season.MaxTierSkipPurchases > 0)
+            if (Season.MaxTierSkipPurchases > 0)
             {
-                var remaining = _season.MaxTierSkipPurchases - _saved.PurchasedTierSkips;
+                var remaining = Season.MaxTierSkipPurchases - Saved.PurchasedTierSkips;
 
                 count = Math.Min(count, Math.Max(0, remaining));
 
@@ -396,15 +430,15 @@ namespace UniTx.SeasonPass
 
             if (payment == SeasonPassPayment.Currency)
             {
-                if (!_season.SellsTierSkipsForCurrency) return 0;
+                if (!Season.SellsTierSkipsForCurrency) return 0;
 
-                if (!_wallet.TrySpend(_season.TierSkipCurrencyId, _season.TierSkipCurrencyCost * count))
+                if (!_wallet.TrySpend(Season.TierSkipCurrencyId, Season.TierSkipCurrencyCost * count))
                 {
                     return 0;
                 }
             }
 
-            _saved.RecordTierSkipPurchase(count);
+            Saved.RecordTierSkipPurchase(count);
 
             ApplyTierSkips(count);
 
@@ -420,18 +454,18 @@ namespace UniTx.SeasonPass
         public async UniTask<QuestProgressResult> ReportQuestProgressAsync(string questId,
             int amount = 1, CancellationToken cToken = default)
         {
-            if (!IsReady || _season == null || amount <= 0) return QuestProgressResult.Rejected;
-            if (!_season.TryGetQuest(questId, out var quest)) return QuestProgressResult.UnknownQuest;
+            if (!IsReady || Season == null || amount <= 0) return QuestProgressResult.Rejected;
+            if (!Season.TryGetQuest(questId, out var quest)) return QuestProgressResult.UnknownQuest;
             if (!CanEarn) return QuestProgressResult.Rejected;
 
             if (!quest.IsAvailableAt(UtcNow)) return QuestProgressResult.Unavailable;
 
-            if (quest.RequiresPaidTrack && !_saved.Owns(SeasonTrack.Premium))
+            if (quest.RequiresPaidTrack && !Saved.Owns(SeasonTrack.Premium))
             {
                 return QuestProgressResult.Unavailable;
             }
 
-            var progress = _saved.GetOrCreateQuest(questId);
+            var progress = Saved.GetOrCreateQuest(questId);
 
             if (progress.IsComplete) return QuestProgressResult.AlreadyComplete;
 
@@ -449,9 +483,9 @@ namespace UniTx.SeasonPass
 
             // Quest XP bypasses the source whitelist and daily caps: the quest definition is
             // itself the ceiling, and it can only ever pay out once.
-            await ApplyXpAsync(quest.XpReward, QuestXpSource, $"quest:{_season.Id}:{questId}", cToken);
+            await ApplyXpAsync(quest.XpReward, QuestXpSource, $"quest:{Season.Id}:{questId}", cToken);
 
-            Raise(new SeasonQuestCompleted(_season.Id, questId, quest.XpReward));
+            Raise(new SeasonQuestCompleted(Season.Id, questId, quest.XpReward));
 
             await PersistAsync(true, cToken);
 
@@ -463,12 +497,12 @@ namespace UniTx.SeasonPass
         {
             if (!IsReady) return;
 
-            _saved.AdvanceSeen(_clock.UnixTimestampNow);
+            Saved.AdvanceSeen(_clock.UnixTimestampNow);
 
             var selected = SelectSeason();
 
             if (selected != null &&
-                !string.Equals(selected.Id, _saved.SeasonId, StringComparison.Ordinal) &&
+                !string.Equals(selected.Id, Saved.SeasonId, StringComparison.Ordinal) &&
                 UtcNow >= selected.StartUtc)
             {
                 await RollOverAsync(selected, cToken);
@@ -478,7 +512,7 @@ namespace UniTx.SeasonPass
                 // A season that has been announced but has not begun is shown, never rolled
                 // into. Wiping the save the moment a teaser appears costs the player their
                 // standing early and buys nothing — the rollover happens when it starts.
-                _season = selected;
+                SetSeason(selected);
             }
 
             RollDailyWindow();
@@ -506,9 +540,9 @@ namespace UniTx.SeasonPass
 
         private DateTime UtcNow => SeasonPassTime.FromUnix(EffectiveUnixNow);
 
-        private long EffectiveUnixNow => _saved == null
+        private long EffectiveUnixNow => Saved == null
             ? _clock.UnixTimestampNow
-            : _saved.AdvanceSeen(_clock.UnixTimestampNow);
+            : Saved.AdvanceSeen(_clock.UnixTimestampNow);
 
         /// <summary>
         /// Indicates whether the loaded save actually belongs to the selected season.
@@ -518,19 +552,37 @@ namespace UniTx.SeasonPass
         /// save still holds the previous one. Reading the old XP against the new ladder would
         /// show a tier the player has not earned on a season that has not begun.
         /// </remarks>
-        private bool IsSaveForSelectedSeason => _season != null && _saved != null &&
-                                                string.Equals(_saved.SeasonId, _season.Id,
+        private bool IsSaveForSelectedSeason => Season != null && Saved != null &&
+                                                string.Equals(Saved.SeasonId, Season.Id,
                                                     StringComparison.Ordinal);
 
-        private int SeasonXp => IsSaveForSelectedSeason ? _saved.TotalXp : 0;
+        private int SeasonXp => IsSaveForSelectedSeason ? Saved.TotalXp : 0;
 
-        private int CurrentTier => _season == null
+        private int CurrentTier => Season == null
             ? 0
-            : SeasonPassCalculator.GetTier(_season, SeasonXp);
+            : SeasonPassCalculator.GetTier(Season, SeasonXp);
 
         private bool CanEarn => _phase is SeasonPhase.Active or SeasonPhase.EndingSoon;
 
         private bool CanClaim => _phase is SeasonPhase.Active or SeasonPhase.EndingSoon or SeasonPhase.Grace;
+
+        /// <summary>
+        /// Points the entity's content key at a season and reloads its static data.
+        /// </summary>
+        /// <param name="season">The season to show, or null for none.</param>
+        private void SetSeason(SeasonPassData season)
+        {
+            _entity.SetDataId(season?.Id);
+            _entity.ReloadData();
+        }
+
+        private void EnsureEntity()
+        {
+            if (_entity != null) return;
+
+            _entity = new SeasonPassEntity(
+                _config?.SaveId ?? SeasonPassSavedData.DefaultSaveId, _backend, _content);
+        }
 
         private SeasonPassData SelectSeason()
         {
@@ -583,7 +635,7 @@ namespace UniTx.SeasonPass
 
         private async UniTask RollOverAsync(SeasonPassData incoming, CancellationToken cToken)
         {
-            var previousId = _saved.SeasonId;
+            var previousId = Saved.SeasonId;
             var forfeited = 0;
 
             if (!string.IsNullOrEmpty(previousId))
@@ -592,7 +644,7 @@ namespace UniTx.SeasonPass
                 // player actually earned on, not the incoming one.
                 if (_content.TryGetData<SeasonPassData>(previousId, out var previous))
                 {
-                    _season = previous;
+                    SetSeason(previous);
                     _phase = SeasonPhase.Grace;
 
                     if (_config.ExpiryPolicy == SeasonExpiryPolicy.AutoGrant)
@@ -612,12 +664,12 @@ namespace UniTx.SeasonPass
 
             var archive = string.IsNullOrEmpty(previousId)
                 ? null
-                : new SeasonArchiveEntry(previousId, CurrentTier, _saved.TotalXp,
-                    _saved.HighestOwnedTrack, _saved.ClaimedKeys.Count, forfeited, EffectiveUnixNow);
+                : new SeasonArchiveEntry(previousId, CurrentTier, Saved.TotalXp,
+                    Saved.HighestOwnedTrack, Saved.ClaimedKeys.Count, forfeited, EffectiveUnixNow);
 
-            _saved.BeginSeason(incoming.Id, archive, _config.MaxArchiveEntries);
+            Saved.BeginSeason(incoming.Id, archive, _config.MaxArchiveEntries);
 
-            _season = incoming;
+            SetSeason(incoming);
             _hasRaisedEndingSoon = false;
 
             var problems = incoming.DescribeProblems();
@@ -628,7 +680,7 @@ namespace UniTx.SeasonPass
             }
 
             // Skips bought past the end of the last ladder were paid for, so they carry over.
-            var banked = _saved.TakeBankedTierSkips();
+            var banked = Saved.TakeBankedTierSkips();
 
             if (banked > 0) ApplyTierSkips(banked);
 
@@ -641,7 +693,7 @@ namespace UniTx.SeasonPass
 
         private void UpdatePhase()
         {
-            if (_season == null)
+            if (Season == null)
             {
                 _phase = SeasonPhase.None;
                 return;
@@ -649,19 +701,19 @@ namespace UniTx.SeasonPass
 
             var now = UtcNow;
 
-            if (now < _season.StartUtc)
+            if (now < Season.StartUtc)
             {
                 _phase = SeasonPhase.NotStarted;
                 return;
             }
 
-            if (now < _season.EndingSoonUtc)
+            if (now < Season.EndingSoonUtc)
             {
                 _phase = SeasonPhase.Active;
                 return;
             }
 
-            if (now < _season.EndUtc)
+            if (now < Season.EndUtc)
             {
                 _phase = SeasonPhase.EndingSoon;
 
@@ -669,7 +721,7 @@ namespace UniTx.SeasonPass
                 {
                     _hasRaisedEndingSoon = true;
 
-                    Raise(new SeasonEndingSoon(_season.Id, (_season.EndUtc - now).TotalHours,
+                    Raise(new SeasonEndingSoon(Season.Id, (Season.EndUtc - now).TotalHours,
                         CountUnclaimed()));
                 }
 
@@ -677,38 +729,38 @@ namespace UniTx.SeasonPass
             }
 
             var inGrace = _config.ExpiryPolicy == SeasonExpiryPolicy.GraceWindow &&
-                          now < _season.GraceEndUtc;
+                          now < Season.GraceEndUtc;
 
             _phase = inGrace ? SeasonPhase.Grace : SeasonPhase.Ended;
         }
 
         private void RollDailyWindow()
         {
-            if (_saved == null) return;
+            if (Saved == null) return;
 
             var dayStart = SeasonPassTime.StartOfUtcDay(EffectiveUnixNow);
 
             // Strictly greater, never merely different: the clock is a high-water mark, so a
             // day boundary can only ever move forward.
-            if (dayStart > _saved.DailyWindowStartUnix) _saved.ResetDailyXp(dayStart);
+            if (dayStart > Saved.DailyWindowStartUnix) Saved.ResetDailyXp(dayStart);
         }
 
         private void RollQuestWindows()
         {
-            if (_saved == null || _season == null) return;
+            if (Saved == null || Season == null) return;
 
             var now = EffectiveUnixNow;
             var dayStart = SeasonPassTime.StartOfUtcDay(now);
             var weekStart = SeasonPassTime.StartOfUtcWeek(now);
 
-            if (dayStart > _saved.DailyQuestWindowStartUnix)
+            if (dayStart > Saved.DailyQuestWindowStartUnix)
             {
-                _saved.ResetQuests(CollectQuestIds(SeasonQuestScope.Daily), SeasonQuestScope.Daily, dayStart);
+                Saved.ResetQuests(CollectQuestIds(SeasonQuestScope.Daily), SeasonQuestScope.Daily, dayStart);
             }
 
-            if (weekStart > _saved.WeeklyQuestWindowStartUnix)
+            if (weekStart > Saved.WeeklyQuestWindowStartUnix)
             {
-                _saved.ResetQuests(CollectQuestIds(SeasonQuestScope.Weekly), SeasonQuestScope.Weekly, weekStart);
+                Saved.ResetQuests(CollectQuestIds(SeasonQuestScope.Weekly), SeasonQuestScope.Weekly, weekStart);
             }
         }
 
@@ -716,7 +768,7 @@ namespace UniTx.SeasonPass
         {
             _questIdBuffer.Clear();
 
-            foreach (var quest in _season.Quests)
+            foreach (var quest in Season.Quests)
             {
                 if (quest != null && quest.Scope == scope) _questIdBuffer.Add(quest.QuestId);
             }
@@ -726,13 +778,13 @@ namespace UniTx.SeasonPass
 
         private async UniTask SyncAsync(CancellationToken cToken)
         {
-            var remote = await _backend.SyncAsync(_saved, cToken);
+            var remote = await _backend.SyncAsync(Saved, cToken);
 
-            if (remote != null) SeasonPassReconciler.Reconcile(_saved, remote);
+            if (remote != null) SeasonPassReconciler.Reconcile(Saved, remote);
 
             // Cleared whether or not the backend returned a record: it was handed the queue and
             // is the only thing that can act on it. Keeping them would replay forever.
-            _saved.ClearPendingGrants();
+            Saved.ClearPendingGrants();
         }
 
         private async UniTask ApplyXpAsync(int amount, string sourceId, string grantId,
@@ -746,19 +798,19 @@ namespace UniTx.SeasonPass
 
             var tierBefore = CurrentTier;
 
-            _saved.AddXp(amount);
-            _saved.RecordGrantId(grantId);
+            Saved.AddXp(amount);
+            Saved.RecordGrantId(grantId);
 
             // Only queue when there is something to replay to. A local backend is always
             // reachable, so a single-player game never pays for a queue it will never drain.
             if (!_backend.IsOnline)
             {
-                _saved.QueuePendingGrant(new SeasonPendingGrant(
-                    grantId ?? $"{sourceId}:{EffectiveUnixNow}:{_saved.TotalXp}",
+                Saved.QueuePendingGrant(new SeasonPendingGrant(
+                    grantId ?? $"{sourceId}:{EffectiveUnixNow}:{Saved.TotalXp}",
                     sourceId, amount, EffectiveUnixNow));
             }
 
-            Raise(new SeasonXpGranted(_season.Id, sourceId, amount, _saved.TotalXp));
+            Raise(new SeasonXpGranted(Season.Id, sourceId, amount, Saved.TotalXp));
 
             RaiseTierUnlocks(tierBefore, CurrentTier);
 
@@ -775,17 +827,17 @@ namespace UniTx.SeasonPass
 
             for (var index = 0; index < count; index++)
             {
-                var needed = SeasonPassCalculator.GetXpToNextTier(_season, _saved.TotalXp);
+                var needed = SeasonPassCalculator.GetXpToNextTier(Season, Saved.TotalXp);
 
                 if (needed <= 0)
                 {
                     // The ladder is finished and bonus tiers are off, so the remaining skips
                     // have nothing to buy this season. Banking them keeps what was paid for.
-                    _saved.BankTierSkips(count - index);
+                    Saved.BankTierSkips(count - index);
                     break;
                 }
 
-                _saved.AddXp(needed);
+                Saved.AddXp(needed);
             }
 
             RaiseTierUnlocks(tierBefore, CurrentTier);
@@ -795,11 +847,11 @@ namespace UniTx.SeasonPass
         {
             if (to <= from) return;
 
-            var maxTier = _season.MaxTier;
+            var maxTier = Season.MaxTier;
 
             for (var tier = from + 1; tier <= to; tier++)
             {
-                Raise(new SeasonTierUnlocked(_season.Id, tier, tier > maxTier));
+                Raise(new SeasonTierUnlocked(Season.Id, tier, tier > maxTier));
             }
         }
 
@@ -811,17 +863,17 @@ namespace UniTx.SeasonPass
         private async UniTask GrantBacklogAsync(CancellationToken cToken,
             SeasonTrack? minTrack = null)
         {
-            if (_season == null) return;
+            if (Season == null) return;
 
-            SeasonPassCalculator.CollectUnlockedRewards(_season, CurrentTier, _workBuffer);
+            SeasonPassCalculator.CollectUnlockedRewards(Season, CurrentTier, _workBuffer);
 
             var pending = _workBuffer.ToArray();
 
             foreach (var reward in pending)
             {
                 if (minTrack.HasValue && reward.Track < minTrack.Value) continue;
-                if (!_saved.Owns(reward.Track)) continue;
-                if (_saved.HasClaimed(reward.ToClaimKey())) continue;
+                if (!Saved.Owns(reward.Track)) continue;
+                if (Saved.HasClaimed(reward.ToClaimKey())) continue;
 
                 var data = FindReward(reward);
 
@@ -833,20 +885,20 @@ namespace UniTx.SeasonPass
 
         private async UniTask<int> RetryFailedClaimsAsync(CancellationToken cToken)
         {
-            if (_saved.PendingClaimKeys.Count == 0) return 0;
+            if (Saved.PendingClaimKeys.Count == 0) return 0;
 
-            var keys = new string[_saved.PendingClaimKeys.Count];
+            var keys = new string[Saved.PendingClaimKeys.Count];
 
             for (var index = 0; index < keys.Length; index++)
             {
-                keys[index] = _saved.PendingClaimKeys[index];
+                keys[index] = Saved.PendingClaimKeys[index];
             }
 
             var delivered = 0;
 
             foreach (var key in keys)
             {
-                if (!SeasonRewardRef.TryParseClaimKey(_season?.Id, key, out var reference)) continue;
+                if (!SeasonRewardRef.TryParseClaimKey(Season?.Id, key, out var reference)) continue;
 
                 var data = FindReward(reference);
 
@@ -881,13 +933,13 @@ namespace UniTx.SeasonPass
 
             if (!granted)
             {
-                _saved.QueueFailedClaim(reference.ToClaimKey());
+                Saved.QueueFailedClaim(reference.ToClaimKey());
                 Raise(new SeasonRewardGrantFailed(reference));
 
                 return false;
             }
 
-            _saved.RecordClaim(reference.ToClaimKey());
+            Saved.RecordClaim(reference.ToClaimKey());
             Raise(new SeasonRewardClaimed(reference, isAutomatic));
 
             return true;
@@ -895,9 +947,9 @@ namespace UniTx.SeasonPass
 
         private SeasonRewardData FindReward(SeasonRewardRef reference)
         {
-            if (_season == null) return null;
+            if (Season == null) return null;
 
-            foreach (var reward in _season.GetRewards(reference.Tier))
+            foreach (var reward in Season.GetRewards(reference.Tier))
             {
                 if (reward == null || !reward.IsValid) continue;
 
@@ -913,16 +965,16 @@ namespace UniTx.SeasonPass
 
         private int CountUnclaimed()
         {
-            if (_season == null) return 0;
+            if (Season == null) return 0;
 
-            SeasonPassCalculator.CollectUnlockedRewards(_season, CurrentTier, _workBuffer);
+            SeasonPassCalculator.CollectUnlockedRewards(Season, CurrentTier, _workBuffer);
 
             var count = 0;
 
             foreach (var reward in _workBuffer)
             {
-                if (!_saved.Owns(reward.Track)) continue;
-                if (_saved.HasClaimed(reward.ToClaimKey())) continue;
+                if (!Saved.Owns(reward.Track)) continue;
+                if (Saved.HasClaimed(reward.ToClaimKey())) continue;
 
                 count++;
             }
@@ -931,23 +983,23 @@ namespace UniTx.SeasonPass
         }
 
         private UniTask PersistAsync(bool isCheckpoint, CancellationToken cToken) =>
-            _backend.SaveAsync(_saved, isCheckpoint && _config.FlushOnCheckpoint, cToken);
+            _entity.SaveAsync(isCheckpoint && _config.FlushOnCheckpoint, cToken);
 
         private SeasonPassSnapshot BuildSnapshot()
         {
-            if (!IsReady || _season == null)
+            if (!IsReady || Season == null)
             {
                 return new SeasonPassSnapshot(null, SeasonPhase.None, default, SeasonTrack.Free, 0,
-                    TimeSpan.Zero, _saved?.BankedTierSkips ?? 0);
+                    TimeSpan.Zero, Saved?.BankedTierSkips ?? 0);
             }
 
-            var remaining = _season.EndUtc - UtcNow;
+            var remaining = Season.EndUtc - UtcNow;
 
-            return new SeasonPassSnapshot(_season.Id, _phase,
-                SeasonPassCalculator.GetProgress(_season, SeasonXp),
-                IsSaveForSelectedSeason ? _saved.HighestOwnedTrack : SeasonTrack.Free,
+            return new SeasonPassSnapshot(Season.Id, _phase,
+                SeasonPassCalculator.GetProgress(Season, SeasonXp),
+                IsSaveForSelectedSeason ? Saved.HighestOwnedTrack : SeasonTrack.Free,
                 CountUnclaimed(), remaining > TimeSpan.Zero ? remaining : TimeSpan.Zero,
-                _saved.BankedTierSkips);
+                Saved.BankedTierSkips);
         }
 
         private void RaiseChanged() => OnChanged.SafeInvoke(BuildSnapshot());

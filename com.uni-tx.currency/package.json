@@ -1,0 +1,36 @@
+{
+  "name": "com.uni-tx.currency",
+  "version": "1.5.0",
+  "displayName": "UniTx Currency",
+  "description": "Currencies as entities: static currency definitions joined with per-player balances, with capped grants, idempotent delivery, atomic spends and change events.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.currency/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.currency/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.currency/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "currency",
+    "wallet",
+    "economy",
+    "gameplay"
+  ],
+  "dependencies": {
+    "com.unity.test-framework": "1.4.6"
+  },
+  "samples": [
+    {
+      "displayName": "Currency Wallet",
+      "description": "Two currencies built as entities from content, then granted and spent through the currency service.",
+      "path": "Samples~/CurrencyWallet"
+    }
+  ]
+}

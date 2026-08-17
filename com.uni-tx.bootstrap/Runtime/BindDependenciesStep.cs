@@ -2,8 +2,10 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniTx.Content;
 using UniTx.Core;
+using UniTx.Currency;
 using UniTx.Entity;
 using UniTx.IoC;
+using UniTx.Rewards;
 using UniTx.Serialization;
 using UnityEngine;
 
@@ -33,6 +35,8 @@ namespace UniTx.Bootstrap
             binder.Bind<ContentService>().AsSingleton().Conclude();
             binder.Bind<SerialisationService>().AsSingleton().Conclude();
             binder.Bind<EntityService>().AsSingleton().Conclude();
+            binder.Bind<CurrencyService>().AsSingleton().Conclude();
+            binder.Bind<RewardService>().AsSingleton().Conclude();
 
             return UniTask.CompletedTask;
         }

@@ -1,3 +1,6 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
+
 namespace UniTx.Entity
 {
     /// <summary>
@@ -8,7 +11,8 @@ namespace UniTx.Entity
         /// <summary>
         /// Creates and registers all entities described by the loaded content data.
         /// </summary>
-        void LoadEntities();
+        /// <param name="cToken">Token to cancel the load.</param>
+        UniTask LoadEntitiesAsync(CancellationToken cToken = default);
 
         /// <summary>
         /// Resets and unregisters all currently loaded entities.
