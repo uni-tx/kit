@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.season-pass",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "displayName": "UniTx Season Pass",
   "description": "Seasonal battle pass with free and paid reward tracks, monotonic XP, capped earn sources, quests, tier skips, retroactive unlocks, configurable expiry and a backend seam for server authority.",
   "unity": "6000.5",

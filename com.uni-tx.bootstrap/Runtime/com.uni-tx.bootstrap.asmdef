@@ -15,7 +15,8 @@
         "GUID:0b48a20554c0199f4680699170cbbc96",
         "GUID:f51ebe6a0ceec4240a699833d6309b23",
         "com.uni-tx.season-pass",
-        "com.uni-tx.daily-rewards"
+        "com.uni-tx.daily-rewards",
+        "com.uni-tx.quests"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

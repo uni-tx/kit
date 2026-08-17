@@ -8,6 +8,14 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.8.0] - 2026-08-17
+
+### Added
+
+- `QuestsStep` — binds and starts the quest service (`com.uni-tx.quests`), so a game
+  adopts the quest board by dropping one step into its `AppLoader`, exactly like
+  `DailyRewardsStep` and `SeasonPassStep`.
+
 ## [1.7.0] - 2026-08-17
 
 ### Changed

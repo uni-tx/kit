@@ -1,0 +1,44 @@
+{
+  "name": "com.uni-tx.quests",
+  "version": "1.8.0",
+  "displayName": "UniTx Quests",
+  "description": "Quests, missions and goals as entities: counter objectives reported from gameplay events, one-time/daily/weekly cadence with UTC resets, prerequisite chains, idempotent claims through com.uni-tx.rewards, and a backend seam for server authority.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.quests/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.quests/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.quests/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "quests",
+    "missions",
+    "goals",
+    "objectives",
+    "retention",
+    "liveops",
+    "progression"
+  ],
+  "dependencies": {
+    "com.unity.test-framework": "1.4.6"
+  },
+  "samples": [
+    {
+      "displayName": "Quests Flow",
+      "description": "The whole lifecycle on a manual clock: reporting progress from game events, completing a prerequisite chain, claiming rewards, and watching a daily quest roll over at the reset hour.",
+      "path": "Samples~/QuestsFlow"
+    },
+    {
+      "displayName": "Quests Screen",
+      "description": "A uGUI quest list: icon, name and description per quest, per-objective progress, a claim button that appears on completion, and locked/claimed overlays. Needs com.uni-tx.widgets and com.uni-tx.sprite-loader; without them the sample's assembly is skipped rather than breaking the project.",
+      "path": "Samples~/QuestsScreen"
+    }
+  ]
+}

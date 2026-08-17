@@ -1,0 +1,50 @@
+[
+  {
+    "_id": "quests_default",
+    "_displayName": "Today's Quests",
+    "_quests": [
+      {
+        "_id": "daily_win",
+        "_displayName": "Win Matches",
+        "_description": "Win two matches today",
+        "_iconAddress": "icon_daily_win",
+        "_reset": 1,
+        "_order": 0,
+        "_objectives": [
+          { "_key": "win_match", "_displayName": "Win a match", "_target": 2, "_iconAddress": "icon_win_match" }
+        ],
+        "_rewards": [
+          { "_rewardId": "dw_coins", "_kind": 0, "_itemId": "coins", "_amount": 100, "_iconAddress": "icon_coins" }
+        ]
+      },
+      {
+        "_id": "daily_play",
+        "_displayName": "Daily Player",
+        "_description": "Play one session today",
+        "_iconAddress": "icon_daily_play",
+        "_reset": 1,
+        "_order": 1,
+        "_objectives": [
+          { "_key": "play_session", "_displayName": "Play a session", "_target": 1, "_iconAddress": "icon_play" }
+        ],
+        "_rewards": [
+          { "_rewardId": "dp_gems", "_kind": 0, "_itemId": "gems", "_amount": 5, "_iconAddress": "icon_gems" }
+        ]
+      },
+      {
+        "_id": "weekly_win",
+        "_displayName": "Weekly Warrior",
+        "_description": "Win ten matches this week",
+        "_iconAddress": "icon_weekly_win",
+        "_reset": 2,
+        "_order": 2,
+        "_objectives": [
+          { "_key": "win_match", "_displayName": "Win a match", "_target": 10, "_iconAddress": "icon_win_match" }
+        ],
+        "_rewards": [
+          { "_rewardId": "ww_chest", "_kind": 1, "_itemId": "chest", "_amount": 1, "_iconAddress": "icon_chest" }
+        ]
+      }
+    ]
+  }
+]

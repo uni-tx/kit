@@ -1,0 +1,36 @@
+{
+    "name": "com.uni-tx.quests.samples.screen",
+    "rootNamespace": "UniTx.Quests.Samples",
+    "references": [
+        "com.uni-tx.quests",
+        "GUID:88de943b63bc077d4afbf64705e19542",
+        "GUID:02cc419b39abf469fbe04536cb78b5a9",
+        "GUID:68530312e62264e4aa84b3fb40888966",
+        "GUID:dfb5090fb55f0631a6f8f6de3abae98e",
+        "GUID:2bafac87e7f4b9b418d9448d219b01ab",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITX_QUESTS_SAMPLE_WIDGETS",
+        "UNITX_QUESTS_SAMPLE_SPRITES"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.uni-tx.widgets",
+            "expression": "1.4.0",
+            "define": "UNITX_QUESTS_SAMPLE_WIDGETS"
+        },
+        {
+            "name": "com.uni-tx.sprite-loader",
+            "expression": "1.4.0",
+            "define": "UNITX_QUESTS_SAMPLE_SPRITES"
+        }
+    ],
+    "noEngineReferences": false
+}

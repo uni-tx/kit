@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.widgets",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "displayName": "UniTx Widgets",
   "description": "Stack-based UI widget manager with async push/pop, typed data, Addressables prefab mapping and device safe-area layout.",
   "unity": "6000.5",
