@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.tweening",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "displayName": "UniTx Tweening",
   "description": "Allocation-light UniTask tween engine for transforms, colors and arbitrary values, with easing and awaitable sequencing.",
   "unity": "6000.5",

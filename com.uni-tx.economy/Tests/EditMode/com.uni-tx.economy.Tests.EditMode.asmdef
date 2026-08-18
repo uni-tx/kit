@@ -1,0 +1,31 @@
+{
+    "name": "com.uni-tx.economy.Tests.EditMode",
+    "rootNamespace": "UniTx.Economy.Tests",
+    "references": [
+        "com.uni-tx.economy",
+        "com.uni-tx.currency",
+        "com.uni-tx.rewards",
+        "com.uni-tx.core",
+        "com.uni-tx.content",
+        "com.uni-tx.serialization",
+        "com.uni-tx.ioc",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

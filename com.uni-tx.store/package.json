@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.store",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "displayName": "UniTx Store",
   "description": "A content-driven shop: each offer is an IAP (sold through UniIap, price from the store), a free claim on a cooldown (the repeat-visit loop), or a rewarded-video offer (granted only when the ad completes). Idempotent claims, entity-backed saves, and a backend seam for server authority.",
   "unity": "6000.5",

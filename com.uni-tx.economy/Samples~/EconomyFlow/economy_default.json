@@ -1,0 +1,28 @@
+{
+  "_id": "core",
+  "_displayName": "Core",
+  "_currencyIds": ["coins", "gems"],
+  "_exchangeRules": [
+    {
+      "_id": "coins_to_gems",
+      "_fromCurrencyId": "coins",
+      "_toCurrencyId": "gems",
+      "_rate": 10,
+      "_minAmount": 5
+    }
+  ],
+  "_purchases": [
+    {
+      "_id": "power_up",
+      "_displayName": "Power Up",
+      "_costs": [{ "_currencyId": "gems", "_amount": 3 }],
+      "_rewards": [{ "_id": "pu_r1", "_kind": 0, "_itemId": "coins", "_amount": 100 }]
+    },
+    {
+      "_id": "booster",
+      "_displayName": "Coin Booster",
+      "_costs": [{ "_currencyId": "gems", "_amount": 10 }],
+      "_rewards": [{ "_id": "bo_r1", "_kind": 0, "_itemId": "coins", "_amount": 500 }]
+    }
+  ]
+}

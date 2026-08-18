@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.currency",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "displayName": "UniTx Currency",
   "description": "Currencies as entities: static currency definitions joined with per-player balances, with capped grants, idempotent delivery, atomic spends and change events.",
   "unity": "6000.5",

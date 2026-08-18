@@ -1,0 +1,31 @@
+{
+  "name": "com.uni-tx.economy",
+  "version": "1.11.0",
+  "displayName": "UniTx Economy",
+  "description": "The kit's economy layer: any number of named economies, each a content-defined grouping of currencies with exchange rules and virtual purchases (costs -> rewards) granted atomically and idempotently.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "author": {
+    "name": "UniTx",
+    "email": "m.tajeelxya@gmail.com"
+  },
+  "keywords": [
+    "economy",
+    "currency",
+    "exchange",
+    "virtual purchase",
+    "wallet"
+  ],
+  "samples": [
+    {
+      "displayName": "Economy Flow",
+      "description": "Two economies on a manual clock: grant a currency, exchange one currency into another at a content-defined rate, and buy a virtual purchase that costs currencies and pays rewards.",
+      "path": "Samples~/EconomyFlow"
+    },
+    {
+      "displayName": "Economy Screen",
+      "description": "A uGUI wallet: one tab per economy, each listing its currencies with balances, a rate-visible exchange button, and a buy button per purchase. Needs com.uni-tx.widgets and com.uni-tx.sprite-loader; without them the sample's assembly is skipped rather than breaking the project.",
+      "path": "Samples~/EconomyScreen"
+    }
+  ]
+}

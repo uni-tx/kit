@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.pooling",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "displayName": "UniTx Pooling",
   "description": "DI-aware GameObject pooling built on UnityEngine.Pool with lifecycle hooks and typed data injection.",
   "unity": "6000.5",
