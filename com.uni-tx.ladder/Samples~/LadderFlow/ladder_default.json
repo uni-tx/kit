@@ -1,0 +1,30 @@
+{
+  "_id": "launch_ladder",
+  "_displayName": "Launch Event",
+  "_rungs": [
+    {
+      "_id": "first_claim",
+      "_displayName": "First Claim",
+      "_steps": 1,
+      "_rewards": [
+        { "_rewardId": "r1r1", "_kind": 0, "_itemId": "coins", "_amount": 100 }
+      ]
+    },
+    {
+      "_id": "three_claims",
+      "_displayName": "Three Claims",
+      "_steps": 3,
+      "_rewards": [
+        { "_rewardId": "r2r1", "_kind": 0, "_itemId": "coins", "_amount": 250 }
+      ]
+    },
+    {
+      "_id": "grand_prize",
+      "_displayName": "Grand Prize",
+      "_steps": 5,
+      "_rewards": [
+        { "_rewardId": "r3r1", "_kind": 0, "_itemId": "gems", "_amount": 50 }
+      ]
+    }
+  ]
+}

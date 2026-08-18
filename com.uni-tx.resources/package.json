@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.resources",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "displayName": "UniTx Resources",
   "description": "Unified async asset loading over Addressables, with progress, cancellation and grouped release.",
   "unity": "6000.5",

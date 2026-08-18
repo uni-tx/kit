@@ -1,0 +1,29 @@
+{
+    "name": "com.uni-tx.ladder.quests-bridge",
+    "rootNamespace": "UniTx.Ladder.Integrations",
+    "references": [
+        "com.uni-tx.ladder",
+        "com.uni-tx.quests",
+        "com.uni-tx.core",
+        "com.uni-tx.events",
+        "com.uni-tx.ioc",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITX_LADDER_QUESTS_BRIDGE"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.uni-tx.quests",
+            "expression": "1.8.0",
+            "define": "UNITX_LADDER_QUESTS_BRIDGE"
+        }
+    ],
+    "noEngineReferences": false
+}

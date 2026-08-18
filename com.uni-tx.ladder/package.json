@@ -1,0 +1,44 @@
+{
+  "name": "com.uni-tx.ladder",
+  "version": "1.9.0",
+  "displayName": "UniTx Ladder",
+  "description": "Reward ladders climbed by completing quests: each claimed quest adds steps, rungs unlock at cumulative step thresholds with claimable rewards, and the top rung is the grand prize — idempotent claims, entity-backed saves, and a backend seam for server authority.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.ladder/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.ladder/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.ladder/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "ladder",
+    "tiers",
+    "rewards",
+    "progression",
+    "liveops",
+    "retention",
+    "quests"
+  ],
+  "dependencies": {
+    "com.unity.test-framework": "1.4.6"
+  },
+  "samples": [
+    {
+      "displayName": "Ladder Flow",
+      "description": "The whole lifecycle on a manual clock: quest claims add steps, rungs unlock and pay out as the climb passes each threshold, and the top rung's grand prize caps the ladder.",
+      "path": "Samples~/LadderFlow"
+    },
+    {
+      "displayName": "Ladder Screen",
+      "description": "A uGUI ladder: one row per rung with its reward, a progress bar toward the next rung, and a claim button that appears once a rung is reached. Needs com.uni-tx.widgets and com.uni-tx.sprite-loader; without them the sample's assembly is skipped rather than breaking the project.",
+      "path": "Samples~/LadderScreen"
+    }
+  ]
+}
