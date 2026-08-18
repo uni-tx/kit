@@ -1,0 +1,50 @@
+{
+  "_id": "store_default",
+  "_displayName": "Daily Shop",
+  "_offers": [
+    {
+      "_id": "starter_pack",
+      "_kind": 0,
+      "_displayName": "Starter Pack",
+      "_section": "Daily Deals",
+      "_badge": 1,
+      "_productId": "com.example.starter_pack",
+      "_rewards": [
+        { "_rewardId": "starter_coins", "_kind": 0, "_itemId": "coins", "_amount": 1000 },
+        { "_rewardId": "starter_gems", "_kind": 0, "_itemId": "gems", "_amount": 50 }
+      ]
+    },
+    {
+      "_id": "coin_pack",
+      "_kind": 0,
+      "_displayName": "Coin Pack",
+      "_section": "Packs",
+      "_productId": "com.example.coin_pack",
+      "_rewards": [
+        { "_rewardId": "pack_coins", "_kind": 0, "_itemId": "coins", "_amount": 500 }
+      ]
+    },
+    {
+      "_id": "bonus_gems",
+      "_kind": 2,
+      "_displayName": "Bonus Gems",
+      "_section": "Packs",
+      "_priceHint": "Value: $1.99",
+      "_rewards": [
+        { "_rewardId": "bonus_gems", "_kind": 0, "_itemId": "gems", "_amount": 25 }
+      ]
+    },
+    {
+      "_id": "free_pack",
+      "_kind": 1,
+      "_displayName": "Free Pack",
+      "_section": "Free",
+      "_badge": 2,
+      "_cooldownSeconds": 1800,
+      "_maxClaims": 0,
+      "_rewards": [
+        { "_rewardId": "free_coins", "_kind": 0, "_itemId": "coins", "_amount": 100 }
+      ]
+    }
+  ]
+}

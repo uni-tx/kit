@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.ladder",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "displayName": "UniTx Ladder",
   "description": "Reward ladders climbed by completing quests: each claimed quest adds steps, rungs unlock at cumulative step thresholds with claimable rewards, and the top rung is the grand prize — idempotent claims, entity-backed saves, and a backend seam for server authority.",
   "unity": "6000.5",

@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.daily-rewards",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "displayName": "UniTx Daily Rewards",
   "description": "Daily login reward calendars as entities: a configurable UTC reset hour, calendar and streak modes, looped or finite calendars, one idempotent claim per day, and failed deliveries queued for retry.",
   "unity": "6000.5",

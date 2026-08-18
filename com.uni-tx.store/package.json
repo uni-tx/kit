@@ -1,0 +1,45 @@
+{
+  "name": "com.uni-tx.store",
+  "version": "1.10.0",
+  "displayName": "UniTx Store",
+  "description": "A content-driven shop: each offer is an IAP (sold through UniIap, price from the store), a free claim on a cooldown (the repeat-visit loop), or a rewarded-video offer (granted only when the ad completes). Idempotent claims, entity-backed saves, and a backend seam for server authority.",
+  "unity": "6000.5",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.store/LICENSE.md",
+  "documentationUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.store/README.md",
+  "changelogUrl": "https://github.com/uni-tx/kit/blob/main/com.uni-tx.store/CHANGELOG.md",
+  "author": {
+    "name": "uni-tx",
+    "url": "https://github.com/uni-tx"
+  },
+  "keywords": [
+    "unity6",
+    "unity6.5",
+    "upm",
+    "uni-tx",
+    "mobile",
+    "store",
+    "shop",
+    "iap",
+    "offers",
+    "rewarded",
+    "monetization",
+    "liveops",
+    "daily-deals"
+  ],
+  "dependencies": {
+    "com.unity.test-framework": "1.4.6"
+  },
+  "samples": [
+    {
+      "displayName": "Store Flow",
+      "description": "The whole shop lifecycle on a manual clock: claim a free offer, watch a rewarded offer, buy an IAP — with no provider installed the paid kinds degrade gracefully instead of throwing.",
+      "path": "Samples~/StoreFlow"
+    },
+    {
+      "displayName": "Store Screen",
+      "description": "A uGUI shop: one scrollable feed with section headers, daily deals first and the free offer last, each row showing rewards, price and a claim button. Needs com.uni-tx.widgets and com.uni-tx.sprite-loader; without them the sample's assembly is skipped rather than breaking the project.",
+      "path": "Samples~/StoreScreen"
+    }
+  ]
+}

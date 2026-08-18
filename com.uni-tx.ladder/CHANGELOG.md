@@ -8,6 +8,13 @@ packages are released in lockstep at the same version.
 
 ## [Unreleased]
 
+## [1.10.0] - 2026-08-18
+
+### Changed
+
+- Version bumped in lockstep with the rest of the kit (24 packages at 1.10.0).
+
+
 ## [1.9.0] - 2026-08-17
 
 ### Added

@@ -19,16 +19,16 @@ UPM cannot resolve git dependencies declared inside a package, so paste the whol
 ```jsonc
 "dependencies": {
   "com.cysharp.unitask":      "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
-  "com.uni-tx.ioc":           "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.9.0",
-  "com.uni-tx.core":          "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.9.0",
-  "com.uni-tx.events":        "https://github.com/uni-tx/kit.git?path=/com.uni-tx.events#events@1.9.0",
-  "com.uni-tx.resources":     "https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.9.0",
-  "com.uni-tx.content":       "https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.9.0",
-  "com.uni-tx.serialization": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.serialization#serialization@1.9.0",
-  "com.uni-tx.entity":        "https://github.com/uni-tx/kit.git?path=/com.uni-tx.entity#entity@1.9.0",
-  "com.uni-tx.currency":      "https://github.com/uni-tx/kit.git?path=/com.uni-tx.currency#currency@1.9.0",
-  "com.uni-tx.rewards":       "https://github.com/uni-tx/kit.git?path=/com.uni-tx.rewards#rewards@1.9.0",
-  "com.uni-tx.ladder":        "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ladder#ladder@1.9.0"
+  "com.uni-tx.ioc":           "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ioc#ioc@1.10.0",
+  "com.uni-tx.core":          "https://github.com/uni-tx/kit.git?path=/com.uni-tx.core#core@1.10.0",
+  "com.uni-tx.events":        "https://github.com/uni-tx/kit.git?path=/com.uni-tx.events#events@1.10.0",
+  "com.uni-tx.resources":     "https://github.com/uni-tx/kit.git?path=/com.uni-tx.resources#resources@1.10.0",
+  "com.uni-tx.content":       "https://github.com/uni-tx/kit.git?path=/com.uni-tx.content#content@1.10.0",
+  "com.uni-tx.serialization": "https://github.com/uni-tx/kit.git?path=/com.uni-tx.serialization#serialization@1.10.0",
+  "com.uni-tx.entity":        "https://github.com/uni-tx/kit.git?path=/com.uni-tx.entity#entity@1.10.0",
+  "com.uni-tx.currency":      "https://github.com/uni-tx/kit.git?path=/com.uni-tx.currency#currency@1.10.0",
+  "com.uni-tx.rewards":       "https://github.com/uni-tx/kit.git?path=/com.uni-tx.rewards#rewards@1.10.0",
+  "com.uni-tx.ladder":        "https://github.com/uni-tx/kit.git?path=/com.uni-tx.ladder#ladder@1.10.0"
 }
 ```
 

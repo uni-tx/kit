@@ -1,6 +1,6 @@
 {
   "name": "com.uni-tx.quests",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "displayName": "UniTx Quests",
   "description": "Quests, missions and goals as entities: counter objectives reported from gameplay events, one-time/daily/weekly cadence with UTC resets, prerequisite chains, idempotent claims through com.uni-tx.rewards, and a backend seam for server authority.",
   "unity": "6000.5",

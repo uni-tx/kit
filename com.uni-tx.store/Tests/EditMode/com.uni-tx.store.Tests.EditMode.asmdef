@@ -1,0 +1,34 @@
+{
+    "name": "com.uni-tx.store.Tests.EditMode",
+    "references": [
+        "com.uni-tx.store",
+        "GUID:88de943b63bc077d4afbf64705e19542",
+        "GUID:02cc419b39abf469fbe04536cb78b5a9",
+        "GUID:b9ce101bda6446da3aa85acd1a47def9",
+        "GUID:e0136d16d036af0669721236e5c43410",
+        "GUID:fca8a386b53c6727f074e4847712803e",
+        "GUID:b3ec09af0916429c07b4b7fc3968cd8a",
+        "GUID:524b85d0eaa923f412e3ec1aef078900",
+        "GUID:0b48a20554c0199f4680699170cbbc96",
+        "GUID:368e1b92a80ed3344a1ca885fe4775bb",
+        "GUID:f6799882ddee69641a617ab3925d6cb2",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

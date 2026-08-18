@@ -17,7 +17,8 @@
         "com.uni-tx.season-pass",
         "com.uni-tx.daily-rewards",
         "com.uni-tx.quests",
-        "com.uni-tx.ladder"
+        "com.uni-tx.ladder",
+        "com.uni-tx.store"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
